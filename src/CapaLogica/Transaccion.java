@@ -1,4 +1,5 @@
 package CapaLogica;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 
@@ -99,7 +100,7 @@ public class Transaccion {
 		return ejemplar;
 	}
 	
-	public Usuario obtenerUsuario() {
+	public Usuario obtenerUsuario() throws SQLException, Exception {
 		usuario = (new MultiUsuario()).buscar(idUsuario);
 		return usuario;
 	}

@@ -49,7 +49,7 @@ public class MultiLibro {
 		String sql;
 		sql = "UPDATE TLibro "+
 				"SET titulo='"+plibro.getTitulo()+"', volumen='"+plibro.getVolumen()+"', editorial='"+plibro.getEditorial()+"'"
-						+ ", fechaPublicacion='"+plibro.getFechaPublicacion()+"', tipo='"+plibro.getTipo()+"' "+
+						+ ", fechaPublicacion='"+plibro.getFechaPublicacion()+"', tipo='"+plibro.obtenerTipo()+"' "+
 				"WHERE isbn='"+plibro.getISBN()+"';";
 		try {
 			Conector.getConector().ejecutarSQL(sql);

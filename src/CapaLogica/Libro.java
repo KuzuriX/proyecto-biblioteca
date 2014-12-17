@@ -1,5 +1,6 @@
 package CapaLogica;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Vector;
 
@@ -14,7 +15,7 @@ public class Libro {
 	private String editorial;
 	private LocalDate fechaPublicacion;
 	private int numEjemplares;
-	private String tipo;
+	private String tipo; // Reserva o prestamo
 	
 	// Atributos de relaciones
 	private Vector<Autor> listaAutores;
@@ -47,7 +48,7 @@ public class Libro {
 	/**
 	 * @param iSBN
 	 */
-	public void setISBN(String iSBN) {
+	private void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
 	
@@ -131,14 +132,14 @@ public class Libro {
 	/**
 	 * @param tipo
 	 */
-	public void setTipo(String tipo) {
+	public void establecerTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	
 	/**
 	 * @return
 	 */
-	public String getTipo() {
+	public String obtenerTipo() {
 		return tipo;
 	}
 	
@@ -146,7 +147,7 @@ public class Libro {
 		idsAutores.add(pidAutor);
 	}
 	
-	public Vector<Autor> obtenerAutores() {
+	public Vector<Autor> obtenerAutores() throws SQLException, Exception {
 		for (int i = 0; i < idsAutores.size(); i++) {
 			listaAutores.add((new MultiAutor()).buscar(idsAutores.get(i)));
 		}
@@ -158,7 +159,7 @@ public class Libro {
 		idsDescriptores.add(pcodigo);
 	}
 	
-	public Vector<Descriptor> obtenerDescriptores() {
+	public Vector<Descriptor> obtenerDescriptores() throws SQLException, Exception {
 		for (int i = 0; i < idsDescriptores.size(); i++) {
 			listaDescriptores.add((new MultiDescriptor()).buscar(idsDescriptores.get(i)));
 		}
