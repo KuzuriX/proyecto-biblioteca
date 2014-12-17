@@ -4,10 +4,10 @@ package CapaAccesoBD;
  *Clase Conector
  *@version 1.0
  *@author Laura Monge Izaguirre
- *Clase que inicializa la conexión con
+ *Clase que inicializa la conexiï¿½n con
  *los valores correctos y
- *permite manejar una única
- *conexión para todo el proyecto y
+ *permite manejar una ï¿½nica
+ *conexiï¿½n para todo el proyecto y
  *
  */
  
@@ -16,7 +16,7 @@ public class Conector{
 	private static AccesoBD conectorBD = null;
 	
 	/**
-	 *Método estático que devuelve el 
+	 *Mï¿½todo estï¿½tico que devuelve el 
 	 *objeto AccesoBD para que sea utilizado
 	 *por las clases
 	 *@return objeto del tipo AccesoBD del paquete 
@@ -26,7 +26,6 @@ public class Conector{
 	public static AccesoBD getConector() throws 
 	java.sql.SQLException,Exception{
 		if (conectorBD == null){			
-//			conectorBD = new AccesoBD("sun.jdbc.odbc.JdbcOdbcDriver","jdbc:odbc:BDCxC","sa","jass2002");
 			conectorBD = new AccesoBD("sun.jdbc.odbc.JdbcOdbcDriver","jdbc:odbc:BDCxCAccess","","");
 		}
 		return conectorBD;
