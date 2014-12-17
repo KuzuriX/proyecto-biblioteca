@@ -11,7 +11,6 @@ public class Ejemplar {
 	private String condicionActual;
 	// Atributos de relaciones
 	private Libro libro;
-	private Vector<Transaccion> historial;
 	// Persistencia
 	private String idLibro;
 	
@@ -102,12 +101,6 @@ public class Ejemplar {
 	
 	public String obtenerISBN() {
 		return getIdLibro();
-	}
-	
-	public Vector<Transaccion> obtenerHistorial() {
-		historial = (new MultiTransaccion()).buscarPorEjemplar(getCodigo());
-		
-		return historial;
 	}
 
 	/* (non-Javadoc)

@@ -3,11 +3,18 @@ import java.time.LocalDate;
 
 
 public class Transaccion {
+	private String id;
 	private TipoTransaccion tipoTransaccion;
 	private LocalDate fecha;
 	private String descripcion;
+	// Persistencia
 	private String idEjemplar;
 	private String idUsuario;
+	// Atributos de relaciones
+	private Ejemplar ejemplar;
+	private Usuario usuario;
+	
+	
 	/**
 	 * @param tipo
 	 * @param fecha
@@ -21,22 +28,23 @@ public class Transaccion {
 		setDescripcion(pdescripcion);
 		setIdEjemplar(pidEjemplar);
 		setIdUsuario(pidUsuario);
-		crearTipoTransaccion(ptipo);
+		establecerTipoTransaccion(ptipo);
+		
+		ejemplar = null;
 	}
-	
 	
 	/**
 	 * @return the tipoTransaccion
 	 */
-	public TipoTransaccion getTipoTransaccion() {
-		return tipoTransaccion;
+	public String obtenerTipoTransaccion() {
+		return tipoTransaccion.obtenerTipo();
 	}
-	/**
-	 * @param tipoTransaccion the tipoTransaccion to set
-	 */
-	public void setTipoTransaccion(TipoTransaccion tipoTransaccion) {
-		this.tipoTransaccion = tipoTransaccion;
+	
+	private void establecerTipoTransaccion(int ptipo){
+		FabricaTT objFabricaTT = new FabricaTT();
+		tipoTransaccion = (objFabricaTT.obtenerTipostransaccion(ptipo));
 	}
+	
 	/**
 	 * @return the fecha
 	 */
@@ -46,7 +54,7 @@ public class Transaccion {
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(LocalDate fecha) {
+	private void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	/**
@@ -55,10 +63,11 @@ public class Transaccion {
 	public String getDescripcion() {
 		return descripcion;
 	}
+	
 	/**
 	 * @param descripcion the descripcion to set
 	 */
-	public void setDescripcion(String descripcion) {
+	private void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	/**
@@ -70,7 +79,7 @@ public class Transaccion {
 	/**
 	 * @param idEjemplar the idEjemplar to set
 	 */
-	public void setIdEjemplar(String idEjemplar) {
+	private void setIdEjemplar(String idEjemplar) {
 		this.idEjemplar = idEjemplar;
 	}
 	/**
@@ -82,15 +91,17 @@ public class Transaccion {
 	/**
 	 * @param idUsuario the idUsuario to set
 	 */
-	public void setIdUsuario(String idUsuario) {
+	private void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	
-	public void crearTipoTransaccion(int ptipo){
-		FabricaTT objFabricaTT = new FabricaTT();
-		setTipoTransaccion(objFabricaTT.obtenerTipostransaccion(ptipo));
+	public Ejemplar obtenerEjemplar() {
+		ejemplar = (new MultiEjemplar()).buscar(idEjemplar);
+		return ejemplar;
 	}
 	
-	
-
+	public Usuario obtenerUsuario() {
+		usuario = (new MultiUsuario()).buscar(idUsuario);
+		return usuario;
+	}
 }
