@@ -3,7 +3,6 @@ import java.time.LocalDate;
 
 
 public class Transaccion {
-	private String id;
 	private TipoTransaccion tipoTransaccion;
 	private LocalDate fecha;
 	private String descripcion;

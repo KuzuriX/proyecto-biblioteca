@@ -1,85 +1,66 @@
 package CapaLogica;
 
 import java.time.LocalDate;
-import java.util.Vector;
 
 import CapaAccesoBD.Conector;
 
 public class MultiLibro {
-	
 	public  Libro crear(String pisbn, String ptitulo, int pvolumen, String peditorial, LocalDate pfechaPublicacion, String ptipo) 
-			throws java.sql.SQLException,Exception{
-		java.sql.ResultSet rs;
+			throws java.sql.SQLException,Exception {
 		Libro libro=null;
-		int numeroAbono=0;
 		String sql;
 		sql="INSERT INTO TLibro "+
-		"(numCuenta, monto, fecha)"+
-		"VALUES ('"+pnumeroCuenta+"',"+pmonto+",'"+pfecha+"');";
+		"(isbn, titulo, volumen, editorial, fechaPublicacion, tipo)"+
+		"VALUES ('"+pisbn+"','"+ptitulo+"','"+pvolumen+"','"+peditorial+"','"+pfechaPublicacion+"','"+ptipo+"');";
+		
 		Conector.getConector().ejecutarSQL(sql);
 
-		sql = "SELECT max(numero) AS nuevoNumero from TAbono;";
-
-		rs = Conector.getConector().ejecutarSQL(sql, true);
-		if (rs.next()) {
-			numeroAbono = rs.getInt("nuevoNumero");
-			abono = new Abono(numeroAbono, pfecha, pmonto,pnumeroCuenta);
-		} else {
-			throw new java.sql.SQLException ("Error en la BD.");
-		}
-		rs.close();
-		return abono;
+		libro = new Libro(pisbn, ptitulo, pvolumen, peditorial, pfechaPublicacion, ptipo);
+		
+		return libro;
 	}
 	
-	public Libro buscar(String pISBN) throws
+	public Libro buscar(String pisbn) throws
 			java.sql.SQLException,Exception{
 		Libro libro = null;
 		java.sql.ResultSet rs;
 		String sql;
-		
 		sql = "SELECT * "+
 		"FROM TLibro "+
-		"WHERE ISBN='"+pISBN+"';";
+		"WHERE isbn='"+pisbn+"';";
 		rs = Conector.getConector().ejecutarSQL(sql,true);
 		if (rs.next()){
 			libro = new Libro(
-				rs.getInt("numero"),
-				rs.getString("fecha"),
-				rs.getDouble("monto"),
-				rs.getString("numCuenta"));
+				rs.getString("isbn"),
+				rs.getString("titulo"),
+				rs.getInt("volumen"),
+				rs.getString("editorial"),
+				LocalDate.parse(rs.getString("fechaPublicacion")),
+				rs.getString("tipo"));
 		} else {
-			throw new Exception ("El abono no est� registrado en el sistema.");
+			throw new Exception ("El libro no est� registrado en el sistema.");
 		}
 		rs.close();
 		return libro;
 	}
 	
-	public  Vector buscarPorCuenta(String pnumeroCuenta) throws java.sql.SQLException,Exception{
-			java.sql.ResultSet rs;
+	public  void actualizar(Libro plibro) throws 
+		java.sql.SQLException,Exception{
 		String sql;
-		Abono abono=null;
-		Vector abonos=null;
-		sql="SELECT * "+
-		"FROM TAbono "+
-		"WHERE numCuenta='"+pnumeroCuenta+"';";
-		Conector.getConector().ejecutarSQL(sql);
-		rs = Conector.getConector().ejecutarSQL(sql,true);
-		abonos = new Vector();
-		while (rs.next()){
-			abono = new Abono(
-				rs.getInt("numero"),
-				rs.getString("fecha"),
-				rs.getDouble("monto"),
-				rs.getString("numCuenta"));
-				abonos.add(abono);
+		sql = "UPDATE TLibro "+
+				"SET titulo='"+plibro.getTitulo()+"', volumen='"+plibro.getVolumen()+"', editorial='"+plibro.getEditorial()+"'"
+						+ ", fechaPublicacion='"+plibro.getFechaPublicacion()+"', tipo='"+plibro.getTipo()+"' "+
+				"WHERE isbn='"+plibro.getISBN()+"';";
+		try {
+			Conector.getConector().ejecutarSQL(sql);
 		}
-		rs.close();
-		return abonos;
+		catch (Exception e) {
+			throw new Exception ("El libro no est� registrado.");
+		}
 	}
 	
 	public  void borrar(Libro plibro) throws
 			java.sql.SQLException,Exception{
-		java.sql.ResultSet rs;
 		String sql;
 		sql= "DELETE FROM TLibro "+
 		"WHERE isbn='"+plibro.getISBN()+"'";

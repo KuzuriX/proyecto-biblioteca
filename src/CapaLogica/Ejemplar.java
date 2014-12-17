@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Vector;
 
 public class Ejemplar {
-	private int codigo;
+	private String codigo;
 	private String estadoFisico;
 	private LocalDate fechaIngreso;
 	private String condicionActual;
@@ -14,7 +14,7 @@ public class Ejemplar {
 	// Persistencia
 	private String idLibro;
 	
-	public Ejemplar(String pidLibro, int pcodigo, String pestadoFisico, LocalDate pfechaIngreso, String pcondicionActual){
+	public Ejemplar(String pidLibro, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, String pcondicionActual){
 		setIdLibro(pidLibro);
 		setCodigo(pcodigo);
 		setEstadoFisico(pestadoFisico);
@@ -27,14 +27,14 @@ public class Ejemplar {
 	/**
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
 	/**
 	 * @param codigo the codigo to set
 	 */
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -113,7 +113,4 @@ public class Ejemplar {
 				+ condicionActual + ", libro=" + libro + ", idLibro=" + idLibro
 				+ "]";
 	}
-	
-	
-
 }
