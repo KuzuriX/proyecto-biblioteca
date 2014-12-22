@@ -129,6 +129,7 @@ public class MenuAutores extends Menu {
 			Vector autores = (new Gestor()).listarAutores();
 			TreeMap datosAutor;
 			
+			out.println("");
 			out.println("LISTA DE AUTORES");
 			out.println("-----------------------------------------------------------------");
 			

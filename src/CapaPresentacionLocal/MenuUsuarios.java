@@ -134,6 +134,7 @@ public class MenuUsuarios extends Menu {
 			Vector usuarios = (new Gestor()).listarUsuarios();
 			TreeMap datosUsuario;
 			
+			out.println("");
 			out.println("LISTA DE USUARIOS");
 			out.println("-----------------------------------------------------------------");
 			
