@@ -1,13 +1,14 @@
 package CapaLogica;
 
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Vector;
 
 import CapaAccesoBD.Conector;
 
 public class MultiLibro {
-	public  Libro crear(String pisbn, String ptitulo, int pvolumen, String peditorial, LocalDate pfechaPublicacion, String ptipo) 
-			throws java.sql.SQLException,Exception {
+	public Libro crear(String pisbn, String ptitulo, int pvolumen, String peditorial, 
+			LocalDate pfechaPublicacion, String ptipo) throws java.sql.SQLException,Exception {
 		Libro libro=null;
 		String sql;
 		sql="INSERT INTO TLibro "+
@@ -26,10 +27,12 @@ public class MultiLibro {
 		Libro libro = null;
 		java.sql.ResultSet rs;
 		String sql;
+		
 		sql = "SELECT * "+
 		"FROM TLibro "+
 		"WHERE isbn='"+pisbn+"';";
 		rs = Conector.getConector().ejecutarSQL(sql,true);
+		
 		if (rs.next()){
 			libro = new Libro(
 				rs.getString("isbn"),
@@ -45,17 +48,17 @@ public class MultiLibro {
 		return libro;
 	}
 	
-	public  Vector buscarPorNombre(String ptitulo) throws 
-		java.sql.SQLException,Exception{
+	public Vector buscarPorNombre(String ptitulo) throws java.sql.SQLException,Exception {
 		Libro libro=null;
 		Vector libros=null;
 		java.sql.ResultSet rs;
 		String sql;
-		sql = "SELECT * "+
-		"FROM TLibro "+
-		"WHERE titulo LIKE '%"+ptitulo+"%';";
+		
+		sql = "SELECT * FROM TLibro "+
+			  "WHERE titulo LIKE '%"+ptitulo+"%';";
 		rs = Conector.getConector().ejecutarSQL(sql,true);
 		libros = new Vector ();
+		
 		if (rs.next()) {
 			do {
 				libro = new Libro(
@@ -74,12 +77,11 @@ public class MultiLibro {
 		return libros;
 	}
 	
-	public  void actualizar(Libro plibro) throws 
-		java.sql.SQLException,Exception{
+	public void modificar(Libro plibro) throws java.sql.SQLException,Exception{
 		String sql;
 		sql = "UPDATE TLibro "+
 				"SET titulo='"+plibro.getTitulo()+"', volumen='"+plibro.getVolumen()+"', editorial='"+plibro.getEditorial()+"'"
-						+ ", fechaPublicacion='"+plibro.getFechaPublicacion()+"', tipo='"+plibro.obtenerTipo()+"' "+
+						+ ", fechaPublicacion='"+plibro.getFechaPublicacion()+"', tipo='"+plibro.getTipo()+"' "+
 				"WHERE isbn='"+plibro.getISBN()+"';";
 		try {
 			Conector.getConector().ejecutarSQL(sql);
@@ -89,12 +91,61 @@ public class MultiLibro {
 		}
 	}
 	
-	public  void borrar(Libro plibro) throws
-			java.sql.SQLException,Exception{
+	public void eliminar(Libro plibro) throws java.sql.SQLException,Exception{
 		String sql;
-		sql= "DELETE FROM TLibro "+
-		"WHERE isbn='"+plibro.getISBN()+"'";
+		sql= "DELETE FROM TLibro WHERE isbn='"+plibro.getISBN()+"'";
 		Conector.getConector().ejecutarSQL(sql);
 	}
+	
+	public Vector<Libro> listar() throws java.sql.SQLException,Exception {
+		Vector<Libro> lista = new Vector<Libro>();
+		String sql;
+		ResultSet rs, rsAutores;
+		Libro libro;
+		
+		sql = "SELECT * FROM TLibro;";
+		rs = Conector.getConector().ejecutarSQL(sql, true);
+		
+		if (rs.next()) {
+			do {
+				LocalDate fechaPublicacion = LocalDate.parse(rs.getString("fechaPublicacion"));				
+				libro = new Libro(
+					rs.getString("isbn"),
+					rs.getString("titulo"),
+					rs.getInt("volumen"),
+					rs.getString("editorial"),
+					fechaPublicacion,
+					rs.getString("tipo"));
+				
+				// Asociar los autores al libro.
+				sql = "SELECT idautor FROM TAutoresXLibro;";
+				rsAutores = Conector.getConector().ejecutarSQL(sql, true);				
+				if (rsAutores.next()) {
+					do {
+						libro.asignarAutor(rsAutores.getString("idautor"));
+					} while (rsAutores.next());
+				}
+				
+				lista.add(libro);
+			} while (rs.next());
+		} else {
+			throw new Exception ("No hay libros registrados en el sistema.");
+		}
+		rs.close();
 
+		return lista;
+	}
+
+	public void asociarAutor(String pisbn, String pidAutor) 
+			throws java.sql.SQLException, Exception {
+		String sql;
+		
+		sql="INSERT INTO TAutoresXLibro (idautor, idlibro) VALUES ('" + pidAutor +"','"+ pisbn +"');";
+		
+		try {
+			Conector.getConector().ejecutarSQL(sql);
+		} catch (Exception e) {
+			throw new Exception ("No se pudo asociar el autor al libro.");
+		}		
+	}
 }

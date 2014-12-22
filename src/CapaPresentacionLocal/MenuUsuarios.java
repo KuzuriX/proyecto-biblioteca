@@ -16,7 +16,8 @@ public class MenuUsuarios extends Menu {
         		"2. Modificar usuario",
         		"3. Eliminar usuario",
         		"4. Listar usuarios",
-        		"5. Consultar usuario",
+        		"5. Cambiar estado",
+        		"6. Consultar usuario",
                 "0. Volver al menu principal"
         };
 
@@ -45,7 +46,10 @@ public class MenuUsuarios extends Menu {
                 break;            
             case 4:
                 listarUsuarios();
-                break;        
+                break;
+            case 5:
+                cambiarEstado();
+                break;
             case 0: 
             	volver = true;
             	break;
@@ -155,4 +159,35 @@ public class MenuUsuarios extends Menu {
 			mostrarMensaje("No se encontraron usuarios registrados.");
 		}
 	}
+
+	public void cambiarEstado() throws IOException {
+		out.println("Ingrese la identificacion del usuario a modificar: ");
+		String pid = in.readLine();
+
+    	out.println("Ingrese el estado: (0: Normal, 1:Moroso) ");
+		int estado = Integer.parseInt(in.readLine());
+		String pestado = "";
+		switch (estado) {
+			case 0:
+				pestado = "Normal";
+				break;
+			case 1:
+				pestado = "Moroso";
+				break;
+			default:
+				mostrarMensaje("Debe seleccionar una opcion valida, ya sea 0 o 1.");
+				break;
+		}				
+    	
+		if (!pestado.equals("")) {
+	    	try {
+	    		(new Gestor()).cambiarEstadoUsuario(pid, pestado);
+				mostrarMensaje("El usuario se modifico con exito!");
+				
+			} catch (Exception e) {
+				mostrarMensaje("El usuario no se encuentra registrado.");
+			}
+		}
+	}
 }
+

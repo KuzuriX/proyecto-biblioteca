@@ -5,8 +5,10 @@ import java.io.*;
 public class IU extends Menu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream out = System.out;
+    
     static MenuAutores menuAutores = new MenuAutores();
     static MenuDescriptores menuDescriptores = new MenuDescriptores();
+    static MenuLibros menuLibros = new MenuLibros();
     static MenuUsuarios menuUsuarios = new MenuUsuarios();
 
     public static void main(String[] args) throws java.io.IOException {
@@ -35,7 +37,9 @@ public class IU extends Menu {
 	            case 2:
 	                menuDescriptores.mostrarMenu();
 	                break;
-	                
+	            case 3:
+	                menuLibros.mostrarMenu();
+	                break;
 	            case 5:
 	                menuUsuarios.mostrarMenu();
 	                break;

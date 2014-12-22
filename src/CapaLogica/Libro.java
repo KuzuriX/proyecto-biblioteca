@@ -14,7 +14,6 @@ public class Libro {
 	private int volumen;
 	private String editorial;
 	private LocalDate fechaPublicacion;
-	private int numEjemplares;
 	private String tipo; // Reserva o prestamo
 	
 	// Atributos de relaciones
@@ -27,40 +26,53 @@ public class Libro {
 	private Vector<String> idsDescriptores;
 	private Vector<String> idsEjemplares;
 	
-	public Libro(String pisbn, String ptitulo, int pvolumen, String peditorial, LocalDate pfechaPublicacion, String ptipo){
+	/**
+	 * Constructor de Libro
+	 * @param pisbn				ISBN
+	 * @param ptitulo			Titulo del libro
+	 * @param pvolumen			Volumen
+	 * @param peditorial		Editorial
+	 * @param pfechaPublicacion	Fecha de publicacion de libro
+	 * @param ptipo				Tipo de libro, ya sea "Reserva" o "Prestamo"
+	 */
+	public Libro(String pisbn, String ptitulo, int pvolumen, String peditorial, 
+			LocalDate pfechaPublicacion, String ptipo) {
 		setISBN(pisbn);
 		setTitulo(ptitulo);
 		setVolumen(pvolumen);
 		setEditorial(peditorial);
 		setFechaPublicacion(pfechaPublicacion);
-		//setTipo(ptipo);
+		setTipo(ptipo);
 		
-		listaAutores = null;
-		listaDescriptores = null;
-		listaEjemplares = null;
+		listaAutores = new Vector();
+		listaDescriptores = new Vector();
+		listaEjemplares = new Vector();
 		
 		// Persistencia
-		idsAutores = null;
-		idsDescriptores = null;
-		idsEjemplares = null;
+		idsAutores = new Vector();
+		idsDescriptores = new Vector();
+		idsEjemplares = new Vector();
 	}
 	
 	/**
-	 * @param iSBN
+	 * setISBN
+	 * @param iSBN ISBN del libro.
 	 */
 	private void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
 	
 	/**
-	 * @return
+	 * getISBN
+	 * @return String ISBN del libro
 	 */
 	public String getISBN() {
 		return ISBN;
 	}
 	
 	/**
-	 * @param titulo
+	 * setTitulo
+	 * @param titulo Titulo del libro.
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
@@ -81,72 +93,86 @@ public class Libro {
 	}
 	
 	/**
-	 * @return
+	 * getVolumen
+	 * @return int volumen del libro
 	 */
 	public int getVolumen() {
 		return volumen;
 	}
 	
 	/**
-	 * @param editorial
+	 * setEditorial
+	 * @param editorial Editorial del libro
 	 */
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
 	
 	/**
-	 * @return
+	 * getEditorial
+	 * @return String editorial del libro
 	 */
 	public String getEditorial() {
 		return editorial;
 	}
 	
 	/**
-	 * @param fechaPublicacion
+	 * setFechaPublicacion
+	 * @param fechaPublicacion fecha de publicacion del libro.
 	 */
 	public void setFechaPublicacion(LocalDate fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 	
 	/**
-	 * @return
+	 * getFechaPublicacion
+	 * @return LocalDate fecha en que se publico el libro
 	 */
 	public LocalDate getFechaPublicacion() {
 		return fechaPublicacion;
 	}
 	
 	/**
-	 * @param numEjemplares
+	 * setTipo
+	 * @param tipo Tipo de libro "reserva" o "prestamo"
 	 */
-	public void setNumEjemplares(int numEjemplares) {
-		this.numEjemplares = numEjemplares;
-	}
-	
-	/**
-	 * @return
-	 */
-	public int getNumEjemplares() {
-		return numEjemplares;
-	}
-	
-	/**
-	 * @param tipo
-	 */
-	public void establecerTipo(String tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	
 	/**
-	 * @return
+	 * getTipo
+	 * @return String Tipo de libro "reserva" o "prestamo"
 	 */
-	public String obtenerTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 	
+	/**
+	 * obtenerTotalEjemplares
+	 * @return int total de ejemplares que tiene el libro.
+	 */
+	public int obtenerTotalEjemplares() {
+		// TODO: obtener el size() de los ejemplares
+		return 0;
+	}
+	
+	/**
+	 * asignarAutor
+	 * Asignarle un autor al libro
+	 * @param pidAutor identificacion del autor.
+	 */
 	public void asignarAutor(String pidAutor) {
 		idsAutores.add(pidAutor);
 	}
 	
+	/**
+	 * obtenerAutores
+	 * Retorna una lista de objetos de tipo de Autor asociados al libro.
+	 * @return Vector<Autor> Lista de autores
+	 * @throws SQLException
+	 * @throws Exception
+	 */
 	public Vector<Autor> obtenerAutores() throws SQLException, Exception {
 		for (int i = 0; i < idsAutores.size(); i++) {
 			listaAutores.add((new MultiAutor()).buscar(idsAutores.get(i)));
@@ -155,10 +181,21 @@ public class Libro {
 		return listaAutores;
 	}
 	
+	/**
+	 * asignarDescriptor
+	 * @param pcodigo Codigo del descriptor del libro
+	 */
 	public void asignarDescriptor(String pcodigo) {
 		idsDescriptores.add(pcodigo);
 	}
 	
+	/**
+	 * obtenerDescriptores
+	 * Retorna una lista de objetos de tipo de Descriptor asociados al libro.
+	 * @return Vector<Descriptor> Lista de descriptores asociados al libro.
+	 * @throws SQLException
+	 * @throws Exception
+	 */
 	public Vector<Descriptor> obtenerDescriptores() throws SQLException, Exception {
 		for (int i = 0; i < idsDescriptores.size(); i++) {
 			listaDescriptores.add((new MultiDescriptor()).buscar(idsDescriptores.get(i)));
@@ -167,6 +204,11 @@ public class Libro {
 		return listaDescriptores;
 	}
 	
+	/**
+	 * obtenerEjemplares
+	 * Retorna una lista de objetos de tipo de Ejemplar asociados al libro.
+	 * @return
+	 */
 	public Vector<Ejemplar> obtenerEjemplares() {
 		for (int i = 0; i < idsDescriptores.size(); i++) {
 			//listaEjemplares.add((new MultiEjemplar()).buscar(idsDescriptores.get(i)));
@@ -182,8 +224,7 @@ public class Libro {
 	public String toString() {	
 		return "Libro [ISBN=" + ISBN + ", titulo=" + titulo + ", volumen="
 				+ volumen + ", editorial=" + editorial + ", fechaPublicacion="
-				+ fechaPublicacion + ", numEjemplares=" + numEjemplares
-				+ ", tipo=" + tipo + ", listaAutores=" + listaAutores
+				+ fechaPublicacion + ", tipo=" + tipo + ", listaAutores=" + listaAutores
 				+ ", listaDescriptor=" + listaDescriptores + ", listaEjemplares="
 				+ listaEjemplares + ", idsAutores=" + idsAutores
 				+ ", idsDescriptores=" + idsDescriptores + "]";

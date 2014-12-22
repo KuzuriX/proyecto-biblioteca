@@ -1,6 +1,8 @@
 package CapaLogica;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -153,24 +155,116 @@ public class Gestor {
 		return lista;
 	}
 	
+	public void cambiarEstadoUsuario(String pid, String pestado) throws SQLException, Exception {
+		Usuario usuario;
+		usuario = (new MultiUsuario()).buscar(pid);
+
+		usuario.setEstado(pestado);
+		
+		(new MultiUsuario()).modificar(usuario);
+	}
 	/* -------------------------- Libro -------------------------- */
 	
-	public void libroAgregar(String pisbn, String ptitulo, int pvolumen, String peditorial, LocalDate pfechaPublicacion, String ptipo) throws Exception {
+	public void crearLibro(String pisbn, String ptitulo, int pvolumen, String peditorial, 
+			LocalDate pfechaPublicacion, String ptipo) throws Exception {
 		Libro libro;
 		libro = (new MultiLibro()).crear(pisbn, ptitulo, pvolumen, peditorial, pfechaPublicacion, ptipo);
 	}
 	
-	public TreeMap libroBuscar(String pisbn) throws Exception {
+	public void modificarLibro(String pisbn, String ptitulo, int pvolumen, String peditorial, 
+			LocalDate pfechaPublicacion, String ptipo) throws Exception {
+		
+		Libro libro;
+		libro = (new MultiLibro()).buscar(pisbn);
+
+		libro.setTitulo(ptitulo);
+		libro.setVolumen(pvolumen);
+		libro.setEditorial(peditorial);
+		libro.setFechaPublicacion(pfechaPublicacion);
+		libro.setTipo(ptipo);		
+		
+		(new MultiLibro()).modificar(libro);
+	}
+	
+	public void eliminarLibro(String pisbn) throws Exception {
+		Libro libro;
+		libro = (new MultiLibro()).buscar(pisbn);
+		
+		(new MultiLibro()).eliminar(libro);
+		
+		// TODO: Eliminar ejemplares
+	}
+	
+	public Vector listarLibros() throws Exception {
+		Libro libro;
+		Autor autor;
+		Vector lista = new Vector();		
+		Vector libros = (new MultiLibro()).listar();
+		Vector autores;
+		
+		for (int i = 0; i < libros.size(); i++) {
+			libro = ((Libro) libros.get(i));
+			TreeMap datos = new TreeMap();
+			
+			datos.put("isbn", libro.getISBN());
+			datos.put("titulo", libro.getTitulo());
+			datos.put("volumen", libro.getVolumen());
+			datos.put("editorial", libro.getEditorial());
+			datos.put("fechaPublicacion", libro.getFechaPublicacion());
+			datos.put("tipo", libro.getTipo());
+			
+			// Obtener los autores
+			autores = libro.obtenerAutores();
+			ArrayList<String> idsAutores = new ArrayList<String>();
+			for (int j = 0; j < autores.size(); j++) {
+				autor = (Autor) autores.get(j);
+				idsAutores.add(autor.getNombre() + " " + autor.getApellido());
+			}
+			datos.put("idsAutores", idsAutores);
+			
+			lista.add(datos);
+		}
+		
+		return lista;
+	}
+	
+	public String asociarAutorLibro(String pisbn, String pidAutor) throws Exception {
+		String msg = "";
+		Autor autor;
+		Libro libro;
+		
+		autor = (new MultiAutor()).buscar(pidAutor);
+		
+		if (autor != null) {
+			libro = (new MultiLibro()).buscar(pisbn);
+			
+			if (libro != null) {
+				(new MultiLibro()).asociarAutor(pisbn, pidAutor);
+				msg = "El autor se asocio con exito al libro " + libro.getTitulo();
+			} else {
+				msg = "El libro no se encuentra registrado.";
+			}			
+		} else {
+			msg = "El autor no se encuentra registrado.";
+		}
+		
+		return msg;
+	}
+	
+	public TreeMap buscarLibro(String pisbn) throws Exception {
 		TreeMap datos = null;
 		Libro libro=null;
 		String nombre;
+		
 		datos = new TreeMap();
 		libro = (new MultiLibro()).buscar(pisbn);
+		
 		datos.put("titulo", libro.getTitulo());
 		datos.put("volumen", libro.getVolumen());
 		datos.put("editorial", libro.getEditorial());
 		datos.put("fechaPublicacion", libro.getFechaPublicacion());
-		datos.put("tipo", libro.obtenerTipo());
+		datos.put("tipo", libro.getTipo());
+	
 		return datos;
 	}
 	
@@ -187,7 +281,7 @@ public class Gestor {
 			datosLibro.put("volumen", libro.getVolumen());
 			datosLibro.put("editorial", libro.getEditorial());
 			datosLibro.put("fechaPublicacion", libro.getFechaPublicacion());
-			datosLibro.put("tipo", libro.obtenerTipo());
+			datosLibro.put("tipo", libro.getTipo());
 			datosLibros.add(datosLibro);
 		}
 		return datosLibros;
