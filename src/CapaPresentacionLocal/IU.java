@@ -9,8 +9,9 @@ public class IU extends Menu {
     static MenuAutores menuAutores = new MenuAutores();
     static MenuDescriptores menuDescriptores = new MenuDescriptores();
     static MenuLibros menuLibros = new MenuLibros();
-    static MenuUsuarios menuUsuarios = new MenuUsuarios();
     static MenuEjemplares menuEjemplares = new MenuEjemplares();
+    static MenuUsuarios menuUsuarios = new MenuUsuarios();
+    static MenuTransacciones menuTransacciones = new MenuTransacciones();
 
     public static void main(String[] args) throws java.io.IOException {
         int opcion;
@@ -20,7 +21,8 @@ public class IU extends Menu {
         		"2.  Descriptores",
         		"3.  Libros",
         		"4.  Ejemplares",
-        		"5.  Usuarios",
+        		"5.  Transacciones",
+        		"6.  Usuarios",
                 "0.  Salir"
         };
 
@@ -45,6 +47,9 @@ public class IU extends Menu {
 	                menuEjemplares.mostrarMenu();
 	                break;
 	            case 5:
+	                menuTransacciones.mostrarMenu();
+	                break;
+	            case 6:
 	                menuUsuarios.mostrarMenu();
 	                break;
 	                

@@ -9,6 +9,4 @@ public class ReportePrestamo implements TipoTransaccion{
 	public String obtenerCondicion() {
 		return "Prestado";
 	}
-	
-
 }

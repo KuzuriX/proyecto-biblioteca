@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import CapaLogica.Libro;
 import CapaLogica.Gestor;
 
 public class MenuLibros extends Menu {
@@ -251,8 +250,7 @@ public class MenuLibros extends Menu {
 				ArrayList<String> descriptores = (ArrayList<String>) datosLibro.get("idsDescriptores");
 				for (int k = 0; k < descriptores.size(); k++) {
 					out.println("\t\t\t" + descriptores.get(k));
-				}
-				
+				}				
 				out.println("-----------------------------------------------------------------");
 			}			
 			out.println("");

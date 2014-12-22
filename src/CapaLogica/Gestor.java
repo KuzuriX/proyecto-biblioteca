@@ -2,7 +2,9 @@ package CapaLogica;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -486,6 +488,84 @@ public class Gestor {
 			idsDescriptores.add(descriptor.getDescripcion());
 		}
 		datos.put("idsDescriptores", idsDescriptores);
+		
+		return datos;
+	}
+	
+	/* -------------------------- Transacciones -------------------------- */
+	
+	public String crearTransaccion(int ptipo, String pdescripcion, String idEjemplar, 
+			String idUsuario) throws Exception {
+		String msg = "";
+		Transaccion transaccion = null;
+		Ejemplar ejemplar = null;
+		Usuario usuario = null;
+		Date fecha = new Date();
+		LocalDate fechaTrans = LocalDate.now();
+		
+		// Verificar que el ejemplar existe.
+		ejemplar = (new MultiEjemplar()).buscar(idEjemplar);
+		if (ejemplar == null) {
+			return "El ejemplar no existe.";
+		}
+		
+		// Verificar que el usuario existe.
+		usuario = (new MultiUsuario()).buscar(idUsuario);
+		if (usuario == null) {
+			return "El usuario no existe.";
+		}
+		
+		// Obtener el ultimo id de transacciones registradas en la BD.
+		int id = (new MultiTransaccion()).obtenerUltimoId() + 1;
+		
+		// Crear la transaccion
+		transaccion = (new MultiTransaccion()).crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
+		ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
+		
+		return "La transaccion se creo con exito!";
+	}
+	
+	public void eliminarTransaccion(String pid) throws Exception {
+		Transaccion transaccion = (new MultiTransaccion()).buscar(pid);
+		
+		(new MultiTransaccion()).eliminar(transaccion);
+	}
+	
+	public Vector buscarTransaccionPorCodigoEjemplar(String pcodigo) throws Exception {
+		Vector<Transaccion> transacciones = (new MultiTransaccion()).buscarPorCodigoEjemplar(pcodigo);
+		Vector resultados = new Vector();
+
+		for (int i = 0; i < transacciones.size(); i++) {
+			resultados.add(obtenerDatosTransaccion((Transaccion) transacciones.get(i)));
+		}
+		
+		return resultados;
+	}
+	
+	private TreeMap obtenerDatosTransaccion(Transaccion transaccion) throws Exception {
+		TreeMap datos = null;
+		Ejemplar ejemplar = null;
+		Usuario usuario = null;
+		Libro libro = null;
+		
+		datos = new TreeMap();		
+		datos.put("id", transaccion.getId());
+		datos.put("tipo", transaccion.obtenerTipoTransaccion());
+		datos.put("fecha", transaccion.getFecha());
+		datos.put("descripcion", transaccion.getDescripcion());
+		
+		// Obtener la informacion del ejemplar
+		ejemplar = transaccion.obtenerEjemplar();
+		datos.put("ejemplarCodigo", ejemplar.getCodigo());
+		
+		// Obtener la informacion del libro
+		libro = ejemplar.obtenerLibro();
+		datos.put("ejemplarTitulo", libro.getTitulo());
+		
+		// Obtener la informacion del usuario
+		usuario = transaccion.obtenerUsuario();
+		datos.put("usuarioId", usuario.getId());
+		datos.put("usuarioNombreCompleto", usuario.getNombre() + " " + usuario.getApellido());
 		
 		return datos;
 	}

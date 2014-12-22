@@ -1,6 +1,7 @@
 package CapaLogica;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 public class Transaccion {
@@ -15,103 +16,155 @@ public class Transaccion {
 	private Ejemplar ejemplar;
 	private Usuario usuario;
 	
-	
 	/**
-	 * @param tipo
-	 * @param fecha
-	 * @param descripcion
-	 * @param idEjemplar
-	 * @param idUsuario
+	 * Constructor de Transaccion
+	 * @param pid			Identificador de la transaccion
+	 * @param ptipo			Tipo de transaccion
+	 * @param pfecha		Fecha en que se realizo
+	 * @param pdescripcion	Descripcion
+	 * @param pidEjemplar 	Ejemplar sobre el que se realiza la transaccion
+	 * @param pidUsuario	Usuario que realizo la transaccion
 	 */
-	public Transaccion(int pid, int ptipo, LocalDate pfecha,
-			String pdescripcion, String pidEjemplar, String pidUsuario) {
+	public Transaccion(int pid, int ptipo, LocalDate pfecha, String pdescripcion, 
+			String pidEjemplar, String pidUsuario) {
 		setId(pid);
-		setFecha(pfecha);
 		setDescripcion(pdescripcion);
+		setFecha(pfecha);
 		setIdEjemplar(pidEjemplar);
 		setIdUsuario(pidUsuario);
 		establecerTipoTransaccion(ptipo);
 		
 		ejemplar = null;
+		usuario = null;
 	}
 	
+	/**
+	 * getId
+	 * @return int Identificador de la transaccion
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * setId
+	 * @param pid Identificador de la transaccion
+	 */
 	private void setId(int pid) {
 		id = pid;
 	}
 	
 	/**
-	 * @return the tipoTransaccion
+	 * obtenerTipoTransaccion
+	 * @return String Tipo de transaccion
 	 */
 	public String obtenerTipoTransaccion() {
 		return tipoTransaccion.obtenerTipo();
 	}
 	
+	/**
+	 * establecerTipoTransaccion
+	 * @param ptipo tipo de transaccion
+	 */
 	private void establecerTipoTransaccion(int ptipo){
 		FabricaTT objFabricaTT = new FabricaTT();
 		tipoTransaccion = (objFabricaTT.obtenerTipostransaccion(ptipo));
 	}
 	
 	/**
-	 * @return the fecha
+	 * getFecha
+	 * @return LocalDate Fecha en que se realizo la transaccion
 	 */
 	public LocalDate getFecha() {
 		return fecha;
 	}
 	/**
-	 * @param fecha the fecha to set
+	 * setFecha
+	 * @param fecha Fecha en que se realizo la transaccion
 	 */
 	private void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+	
 	/**
-	 * @return the descripcion
+	 * getDescripcion
+	 * @return String Descripcion de la transaccion
 	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 	
 	/**
-	 * @param descripcion the descripcion to set
+	 * setDescripcion
+	 * @param descripcion Descripcion de la transaccion
 	 */
 	private void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
 	/**
-	 * @return the idEjemplar
+	 * getIdEjemplar
+	 * @return String Codigo del ejemplar
 	 */
 	public String getIdEjemplar() {
 		return idEjemplar;
 	}
+	
 	/**
-	 * @param idEjemplar the idEjemplar to set
+	 * setIdEjemplar
+	 * @param idEjemplar Codigo del ejemplar sobre el que realizo la transaccion
 	 */
 	private void setIdEjemplar(String idEjemplar) {
 		this.idEjemplar = idEjemplar;
 	}
+	
 	/**
-	 * @return the idUsuario
+	 * getIdUsuario
+	 * @return String Identificacion del usuario que realizo la transaccion
 	 */
 	public String getIdUsuario() {
 		return idUsuario;
 	}
+	
 	/**
-	 * @param idUsuario the idUsuario to set
+	 * setIdUsuario
+	 * @param idUsuario Identificacion del usuario que realizo la transaccion
 	 */
 	private void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	
-	public Ejemplar obtenerEjemplar() {
-		//ejemplar = (new MultiEjemplar()).buscar(idEjemplar);
+	/**
+	 * obtenerEjemplar
+	 * Retorna un objeto de tipo Ejemplar que contiene la informacion del ejemplar
+	 * sobre el que se realizo la transaccion
+	 * @return Ejemplar Ejemplar sobre el que se realizo la transaccion
+	 * @throws SQLException
+	 * @throws Exception
+	 */
+	public Ejemplar obtenerEjemplar() throws SQLException, Exception {
+		ejemplar = (new MultiEjemplar()).buscar(idEjemplar);
 		return ejemplar;
 	}
 	
+	/**
+	 * obtenerUsuario
+	 * Retorna un objeto de tipo Usuario que contiene la informacion del usuario
+	 * que realizo la transaccion
+	 * @return Usuario Usuario que realizo la transaccion
+	 * @throws SQLException
+	 * @throws Exception
+	 */
 	public Usuario obtenerUsuario() throws SQLException, Exception {
 		usuario = (new MultiUsuario()).buscar(idUsuario);
 		return usuario;
+	}
+	
+	/**
+	 * obtenerCondicionTransaccion
+	 * @return String Condicion actual que debe asignarse al ejemplar
+	 */
+	public String obtenerCondicionTransaccion() {
+		return tipoTransaccion.obtenerCondicion();
 	}
 }
