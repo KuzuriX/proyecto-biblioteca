@@ -65,21 +65,40 @@ public class MenuUsuarios extends Menu {
 	public void crearUsuario() throws IOException {
     	out.println("Ingrese la identificacion: ");
     	String pid = in.readLine();
-
+    	if (pid.equals("")) {
+			mostrarMensaje("La identificacion del usuario no puede estar vacia.");
+			return;
+		}
     	out.println("Ingrese el nombre: ");
     	String pnombre = in.readLine();
-    	
+    	if (pnombre.equals("")) {
+			mostrarMensaje("El nombre del usuario no puede estar vacio.");
+			return;
+		}    	
     	out.println("Ingrese el apellido: ");
     	String papellido = in.readLine();
-    	
+    	if (papellido.equals("")) {
+			mostrarMensaje("El apellido del usuario no puede estar vacio.");
+			return;
+		} 
     	out.println("Ingrese la direccion electronica: ");
     	String pdirElectronica = in.readLine();
-    	
+    	if (pdirElectronica.equals("")) {
+			mostrarMensaje("La direccion electronica del usuario no puede estar vacia.");
+			return;
+		} 
     	out.println("Ingrese la direccion fisica: ");
     	String pdireccion = in.readLine();
-    	
+    	if (pdireccion.equals("")) {
+			mostrarMensaje("La direccion fisica del usuario no puede estar vacia.");
+			return;
+		}    	
     	out.println("Ingrese el telefono: ");
 		String ptelefono = in.readLine();
+		if (ptelefono.equals("")) {
+			mostrarMensaje("El telefono del usuario no puede estar vacio.");
+			return;
+		}
 		
     	try {
 			(new Gestor()).crearUsuario(pid, pnombre, papellido, pdirElectronica, pdireccion, ptelefono);
@@ -93,27 +112,43 @@ public class MenuUsuarios extends Menu {
 	public void modificarUsuario() throws IOException {
 		out.println("Ingrese la identificacion del usuario a modificar: ");
 		String pid = in.readLine();
-
+    	if (pid.equals("")) {
+			mostrarMensaje("Debe ingresar una identificacion.");
+			return;
+		}
     	out.println("Ingrese el nombre: ");
     	String pnombre = in.readLine();
-    	
+    	if (pnombre.equals("")) {
+			mostrarMensaje("El nombre del usuario no puede estar vacio.");
+			return;
+		}    	
     	out.println("Ingrese el apellido: ");
     	String papellido = in.readLine();
-    	
+    	if (papellido.equals("")) {
+			mostrarMensaje("El apellido del usuario no puede estar vacio.");
+			return;
+		} 
     	out.println("Ingrese la direccion electronica: ");
     	String pdirElectronica = in.readLine();
-    	
+    	if (pdirElectronica.equals("")) {
+			mostrarMensaje("La direccion electronica del usuario no puede estar vacia.");
+			return;
+		} 
     	out.println("Ingrese la direccion fisica: ");
     	String pdireccion = in.readLine();
-    	
+    	if (pdireccion.equals("")) {
+			mostrarMensaje("La direccion fisica del usuario no puede estar vacia.");
+			return;
+		}    	
     	out.println("Ingrese el telefono: ");
 		String ptelefono = in.readLine();
-		
-		out.println("Ingrese el estado: ");
-		String pestado = in.readLine();
+		if (ptelefono.equals("")) {
+			mostrarMensaje("El telefono del usuario no puede estar vacio.");
+			return;
+		}
     	
     	try {
-    		(new Gestor()).modificarUsuario(pid, pnombre, papellido, pdirElectronica, pdireccion, ptelefono, pestado);
+    		(new Gestor()).modificarUsuario(pid, pnombre, papellido, pdirElectronica, pdireccion, ptelefono);
 			mostrarMensaje("El usuario se modifico con exito!");
 			
 		} catch (Exception e) {
@@ -124,6 +159,10 @@ public class MenuUsuarios extends Menu {
 	public void eliminarUsuario() throws IOException {
 		out.println("Ingrese la identificacion del usuario: ");
     	String pid = in.readLine();
+    	if (pid.equals("")) {
+			mostrarMensaje("Debe ingresar una identificacion del usuario a eliminar.");
+			return;
+		}
     	
     	try {
 			(new Gestor()).eliminarUsuario(pid);
@@ -163,9 +202,19 @@ public class MenuUsuarios extends Menu {
 	public void cambiarEstado() throws IOException {
 		out.println("Ingrese la identificacion del usuario a modificar: ");
 		String pid = in.readLine();
+		if (pid.equals("")) {
+			mostrarMensaje("Debe ingresar la identificacion del usuario a modificar.");
+			return;
+		}
 
     	out.println("Ingrese el estado: (0: Normal, 1:Moroso) ");
-		int estado = Integer.parseInt(in.readLine());
+    	int estado = -1;
+    	try {
+    		estado = Integer.parseInt(in.readLine());
+    	} catch (Exception e) {
+    		mostrarMensaje("No se ingreso un numero.");
+    		return;
+    	}
 		String pestado = "";
 		switch (estado) {
 			case 0:
@@ -183,7 +232,6 @@ public class MenuUsuarios extends Menu {
 	    	try {
 	    		(new Gestor()).cambiarEstadoUsuario(pid, pestado);
 				mostrarMensaje("El usuario se modifico con exito!");
-				
 			} catch (Exception e) {
 				mostrarMensaje("El usuario no se encuentra registrado.");
 			}

@@ -110,7 +110,7 @@ public class Gestor {
 	}
 	
 	public void modificarUsuario(String pid, String pnombre, String papellido, String pdirElectronica, 
-			String pdireccion, String ptelefono, String pestado) throws Exception {
+			String pdireccion, String ptelefono) throws Exception {
 		
 		Usuario usuario;
 		usuario = (new MultiUsuario()).buscar(pid);
@@ -120,7 +120,6 @@ public class Gestor {
 		usuario.setDirElectronica(pdirElectronica);
 		usuario.setDireccion(pdireccion);
 		usuario.setTelefono(ptelefono);
-		usuario.setEstado(pestado);
 		
 		(new MultiUsuario()).modificar(usuario);
 	}

@@ -60,9 +60,16 @@ public class MenuDescriptores extends Menu {
 	public void crearDescriptor() throws IOException {
     	out.println("Ingrese el codigo: ");
     	String pcodigo = in.readLine();
-
-    	out.println("Ingrese el nombre: ");
+    	if (pcodigo.equals("")) {
+			mostrarMensaje("El codigo del descriptor no puede estar vacio.");
+			return;
+		}
+    	out.println("Ingrese la descripcion: ");
     	String pdescripcion = in.readLine();
+    	if (pdescripcion.equals("")) {
+			mostrarMensaje("La descripcion no puede estar vacia.");
+			return;
+		}
     	
     	try {
 			(new Gestor()).crearDescriptor(pcodigo, pdescripcion);
@@ -76,9 +83,16 @@ public class MenuDescriptores extends Menu {
 	public void modificarDescriptor() throws IOException {
 		out.println("Ingrese el codigo del descriptor a modificar: ");
 		String pcodigo = in.readLine();
-
-    	out.println("Ingrese el nombre: ");
+		if (pcodigo.equals("")) {
+			mostrarMensaje("Debe ingresar un codigo de descriptor para modificar.");
+			return;
+		}
+    	out.println("Ingrese la descripcion: ");
     	String pdescripcion = in.readLine();
+    	if (pdescripcion.equals("")) {
+			mostrarMensaje("La descripcion no puede estar vacia.");
+			return;
+		}
     	
     	try {
     		(new Gestor()).modificarDescriptor(pcodigo, pdescripcion);
@@ -92,6 +106,10 @@ public class MenuDescriptores extends Menu {
 	public void eliminarDescriptor() throws IOException {
 		out.println("Ingrese el codigo del descriptor: ");
     	String pcodigo = in.readLine();
+    	if (pcodigo.equals("")) {
+			mostrarMensaje("No se ingreso un codigo de descriptor para eliminar.");
+			return;
+		}
     	
     	try {
 			(new Gestor()).eliminarDescriptor(pcodigo);

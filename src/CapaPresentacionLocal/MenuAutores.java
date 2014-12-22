@@ -58,23 +58,43 @@ public class MenuAutores extends Menu {
     }
 	
 	public void crearAutor() throws IOException {
-    	out.println("Ingrese la identificacion: ");
-    	String pid = in.readLine();
+		out.println("Ingrese la identificacion: ");
+		String pid = in.readLine();
+		if (pid.equals("")) {
+			mostrarMensaje("La identificacion del autor no puede estar vacia.");
+			return;
+		}
 
     	out.println("Ingrese el nombre: ");
     	String pnombre = in.readLine();
+    	if (pnombre.equals("")) {
+			mostrarMensaje("El nombre del autor no puede estar vacio.");
+			return;
+		}
     	
     	out.println("Ingrese el apellido: ");
     	String papellido = in.readLine();
+    	if (papellido.equals("")) {
+			mostrarMensaje("El apellido del autor no puede estar vacio.");
+			return;
+		}
     	
     	out.println("Ingrese la direccion electronica: ");
     	String pdirElectronica = in.readLine();
     	
     	out.println("Ingrese la nacionalidad: ");
 		String pnacionalidad = in.readLine();
+		if (pnacionalidad.equals("")) {
+			mostrarMensaje("La nacionalidad del autor no puede estar vacio.");
+			return;
+		}
 		
 		out.println("Ingrese el pais de origen: ");
 		String ppaisOrigen = in.readLine();
+		if (ppaisOrigen.equals("")) {
+			mostrarMensaje("El pais de origen del autor no puede estar vacio.");
+			return;
+		}
 		
     	try {
 			(new Gestor()).crearAutor(pid, pnombre, papellido, pdirElectronica, pnacionalidad, ppaisOrigen);
@@ -87,21 +107,41 @@ public class MenuAutores extends Menu {
 	public void modificarAutor() throws IOException {
 		out.println("Ingrese la identificacion del autor a modificar: ");
     	String pid = in.readLine();
-    	
+    	if (pid.equals("")) {
+			mostrarMensaje("La identificacion del autor no puede estar vacia.");
+			return;
+		}
+
     	out.println("Ingrese el nombre: ");
     	String pnombre = in.readLine();
+    	if (pnombre.equals("")) {
+			mostrarMensaje("El nombre del autor no puede estar vacio.");
+			return;
+		}
     	
     	out.println("Ingrese el apellido: ");
     	String papellido = in.readLine();
+    	if (papellido.equals("")) {
+			mostrarMensaje("El apellido del autor no puede estar vacio.");
+			return;
+		}
     	
     	out.println("Ingrese la direccion electronica: ");
     	String pdirElectronica = in.readLine();
     	
     	out.println("Ingrese la nacionalidad: ");
 		String pnacionalidad = in.readLine();
+		if (pnacionalidad.equals("")) {
+			mostrarMensaje("La nacionalidad del autor no puede estar vacio.");
+			return;
+		}
 		
 		out.println("Ingrese el pais de origen: ");
 		String ppaisOrigen = in.readLine();
+		if (ppaisOrigen.equals("")) {
+			mostrarMensaje("El pais de origen del autor no puede estar vacio.");
+			return;
+		}
     	
     	try {
 			(new Gestor()).modificarAutor(pid, pnombre, papellido, pdirElectronica, pnacionalidad, ppaisOrigen);
@@ -115,6 +155,10 @@ public class MenuAutores extends Menu {
 	public void eliminarAutor() throws IOException {
 		out.println("Ingrese la identificacion del autor: ");
     	String pid = in.readLine();
+    	if (pid.equals("")) {
+			mostrarMensaje("No se ingreso la identificacion del autor a eliminar.");
+			return;
+		}
     	
     	try {
 			(new Gestor()).eliminarAutor(pid);
