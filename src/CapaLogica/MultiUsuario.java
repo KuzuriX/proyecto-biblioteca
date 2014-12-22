@@ -28,10 +28,12 @@ public class MultiUsuario {
 		Usuario usuario = null;
 		java.sql.ResultSet rs;
 		String sql;
+		
 		sql = "SELECT * FROM TUSUARIO "+
 			  "WHERE id='"+pid+"';";
 		rs = Conector.getConector().ejecutarSQL(sql,true);
-		if (rs.next()){
+		
+		if (rs.next()) {
 			usuario = new Usuario(
 				rs.getString("id"),
 				rs.getString("nombre"),
@@ -44,6 +46,7 @@ public class MultiUsuario {
 			throw new Exception ("El usuario no esta registrado en el sistema.");
 		}
 		rs.close();
+		
 		return usuario;
 	}
 	

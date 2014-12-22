@@ -8,6 +8,11 @@ import java.util.Date;
 import java.util.TreeMap;
 import java.util.Vector;
 
+import javax.lang.model.element.VariableElement;
+import javax.xml.crypto.Data;
+
+import org.hsqldb.auth.JaasAuthBean;
+
 public class Gestor {
 	/* -------------------------- Autor -------------------------- */
 	public void crearAutor(String pid, String pnombre, String papellido, String pdirElectronica, 
@@ -108,7 +113,7 @@ public class Gestor {
 			String pdireccion, String ptelefono) throws Exception {
 		
 		Usuario usuario;
-		usuario = (new MultiUsuario()).crear(pid, pnombre, papellido, pdirElectronica, pdireccion, ptelefono, "normal");
+		usuario = (new MultiUsuario()).crear(pid, pnombre, papellido, pdirElectronica, pdireccion, ptelefono, "Normal");
 	}
 	
 	public void modificarUsuario(String pid, String pnombre, String papellido, String pdirElectronica, 
@@ -163,6 +168,54 @@ public class Gestor {
 		usuario.setEstado(pestado);
 		
 		(new MultiUsuario()).modificar(usuario);
+	}
+	
+	public TreeMap consultarUsuario(String pid) throws Exception {
+		Usuario usuario = (new MultiUsuario()).buscar(pid);
+		TreeMap datos = new TreeMap();
+		
+		
+		datos.put("id", usuario.getId());
+		datos.put("nombre", usuario.getNombre());
+		datos.put("apellido", usuario.getApellido());
+		datos.put("dirElectronica", usuario.getDirElectronica());
+		datos.put("direccion", usuario.getDireccion());
+		datos.put("telefono", usuario.getTelefono());
+		datos.put("estado", usuario.getEstado());
+		
+		// Libros en prestamo
+		Vector<Transaccion> transacciones = (new MultiTransaccion()).buscarPorIdUsuario(pid);
+		Vector<Transaccion> prestamos = new Vector();
+		Vector<Transaccion> devoluciones = new Vector();
+		
+		for (int i = 0; i < transacciones.size(); i++) {
+			Transaccion transaccion = (Transaccion) transacciones.get(i);
+			
+			if (transaccion.obtenerTipoTransaccion().equals("Reporte de prestamo")) {
+				prestamos.add(transaccion);
+			} else {
+				devoluciones.add(transaccion);
+			}
+		}
+		
+		if (prestamos.size() > devoluciones.size()) {
+			// Hay prestamos pendientes.			
+			ArrayList<String> listaEjemplares = new ArrayList<String>();
+			int cantidadPrestamos = prestamos.size() - devoluciones.size();
+			
+			for (int j= 0; j < cantidadPrestamos; j++) {
+				Transaccion transaccion = (Transaccion) prestamos.get(devoluciones.size() + j);
+				Ejemplar ejemplar = (new MultiEjemplar()).buscar(transaccion.getIdEjemplar());
+				Libro libro = ejemplar.obtenerLibro();
+				
+				listaEjemplares.add(ejemplar.getCodigo() + " " + libro.getTitulo());
+			}
+			datos.put("prestamos", listaEjemplares);			
+		} else {
+			datos.put("prestamos", "El usuario NO tiene libros en prestamo");
+		}		
+		
+		return datos;
 	}
 
 	/* -------------------------- Libro -------------------------- */
@@ -515,14 +568,30 @@ public class Gestor {
 			return "El usuario no existe.";
 		}
 		
-		// Obtener el ultimo id de transacciones registradas en la BD.
-		int id = (new MultiTransaccion()).obtenerUltimoId() + 1;
+		// Verificar que el usuario no este moroso antes de prestar un libro.
+		if (usuario.getEstado().equals("Moroso") && ptipo == 3) {
+			return "No se pudo realizar la transaccion. El usuario se encuentra moroso.";
+		}
 		
-		// Crear la transaccion
-		transaccion = (new MultiTransaccion()).crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
-		ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
+		// Verificar que el ejemplar esta libre.
+		if (ejemplar.getCondicionActual().equals("Libre")) {
+			// Obtener el ultimo id de transacciones registradas en la BD.
+			int id = (new MultiTransaccion()).obtenerUltimoId() + 1;
+			
+			// Crear la transaccion
+			transaccion = (new MultiTransaccion()).crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
+			
+			// Actualizar el estado del ejemplar de Libre a el valor de retorno
+			// del tipo de transaccion
+			ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
+			(new MultiEjemplar()).modificar(ejemplar);
+			
+			msg = "La transaccion se creo con exito!";
+		} else {
+			msg = "No pudo realizar la transaccion. El ejemplar se encuentra " + ejemplar.getCondicionActual();
+		}	
 		
-		return "La transaccion se creo con exito!";
+		return msg;
 	}
 	
 	public void eliminarTransaccion(String pid) throws Exception {

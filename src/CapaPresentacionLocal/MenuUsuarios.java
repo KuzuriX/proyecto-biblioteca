@@ -1,6 +1,7 @@
 package CapaPresentacionLocal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -15,9 +16,9 @@ public class MenuUsuarios extends Menu {
         		"1. Crear usuario",
         		"2. Modificar usuario",
         		"3. Eliminar usuario",
-        		"4. Listar usuarios",
-        		"5. Cambiar estado",
-        		"6. Consultar usuario",
+        		"4. Cambiar estado",
+        		"5. Listar usuarios",
+        		"6. Consultar usuario por identificacion",
                 "0. Volver al menu principal"
         };
 
@@ -45,10 +46,13 @@ public class MenuUsuarios extends Menu {
                 eliminarUsuario();
                 break;            
             case 4:
-                listarUsuarios();
+            	cambiarEstado();
                 break;
             case 5:
-                cambiarEstado();
+            	listarUsuarios();
+                break;
+            case 6:
+            	consultarUsuarioPorId();
                 break;
             case 0: 
             	volver = true;
@@ -235,6 +239,41 @@ public class MenuUsuarios extends Menu {
 			} catch (Exception e) {
 				mostrarMensaje("El usuario no se encuentra registrado.");
 			}
+		}
+	}
+	
+	public void consultarUsuarioPorId() throws IOException {
+		out.println("Ingrese la identificacion del usuario a consultar: ");
+		String pid = in.readLine();
+		if (pid.equals("")) {
+			mostrarMensaje("Debe ingresar la identificacion del usuario a consultar.");
+			return;
+		}
+		
+		try {
+			TreeMap datosUsuario = (new Gestor()).consultarUsuario(pid);
+			ArrayList<String> prestamos = (ArrayList<String>) datosUsuario.get("prestamos");
+			
+			out.println("");
+			out.println("CONSULTAD DE USUARIO POR IDENTIFICACION: " + pid);
+			out.println("-----------------------------------------------------------------");
+			
+			out.println("Identificacion: \t" + datosUsuario.get("id"));
+			out.println("Nombre: \t\t" + datosUsuario.get("nombre"));
+			out.println("Apellido: \t\t" + datosUsuario.get("apellido"));
+			out.println("Direccion electronica: \t" + datosUsuario.get("dirElectronica"));
+			out.println("Direccion: \t\t" + datosUsuario.get("direccion"));
+			out.println("Telefono: \t\t" + datosUsuario.get("telefono"));
+			out.println("Estado: \t\t" + datosUsuario.get("estado"));
+			out.println("Prestamos:");
+			
+			for (int i = 0; i < prestamos.size(); i++) {
+				out.println("\t\t\t" + prestamos.get(i));
+			}
+			out.println("-----------------------------------------------------------------");		
+			out.println("");
+		} catch (Exception e) {
+			mostrarMensaje("No se encontraron usuarios registrados.");
 		}
 	}
 }

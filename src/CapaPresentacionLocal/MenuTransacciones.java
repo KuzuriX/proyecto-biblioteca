@@ -16,7 +16,6 @@ public class MenuTransacciones extends Menu {
         String[] listaMenu = {
         		"1. Crear transaccion",
         		"2. Consultar transacciones por codigo de ejemplar",
-        		"9. Eliminar transaccion",
         		"0. Volver al menu principal"
         };
 
@@ -39,9 +38,6 @@ public class MenuTransacciones extends Menu {
                 break;
             case 2:
             	buscarTransaccionPorCodigoEjemplar();
-                break;
-            case 9:
-                eliminarTransaccion();
                 break;
             case 0: 
             	volver = true;
@@ -89,8 +85,7 @@ public class MenuTransacciones extends Menu {
 		}
 		
     	try {
-    		(new Gestor()).crearTransaccion(tipo, descripcion, idEjemplar, idUsuario);
-			mostrarMensaje("La transaccion se creo con exito!");
+    		mostrarMensaje((new Gestor()).crearTransaccion(tipo, descripcion, idEjemplar, idUsuario));
 		} catch (Exception e) {
 			mostrarMensaje("Hubo problemas al crear la transaccion.");
 			out.println(e);
@@ -124,18 +119,6 @@ public class MenuTransacciones extends Menu {
 			out.println("");
 		} catch (Exception e) {
 			mostrarMensaje("No se encontraron libros registrados.");
-		}
-	}
-	
-	public void eliminarTransaccion() throws IOException {
-		out.println("Ingrese el identificador de la transaccion: ");
-		String id = in.readLine();
-    	
-    	try {
-			(new Gestor()).eliminarTransaccion(id);
-			mostrarMensaje("La transaccion se elimino con exito!");
-		} catch (Exception e) {
-			mostrarMensaje("La transaccion no se encuentra registrado.");
 		}
 	}
 }

@@ -1,8 +1,14 @@
 package CapaLogica;
 
 public class FabricaTT {
-	private TipoTransaccion objTipoTransaccion; 	
+	private TipoTransaccion objTipoTransaccion;
 	
+	/**
+	 * obtenerTipostransaccion
+	 * Retorna un objeto de tipo transaccion segun el parametro. 
+	 * @param ptipo tipo de transaccion
+	 * @return TipoTransaccion
+	 */
 	public TipoTransaccion obtenerTipostransaccion(int ptipo){
 		switch (ptipo) {
 		case 1:
@@ -32,14 +38,16 @@ public class FabricaTT {
 	}
 
 	/**
-	 * @return the objTipoTransaccion
+	 * getObjTipoTransaccion
+	 * @return TipoTransaccion Objeto con el tipo de la transaccion.
 	 */
 	public TipoTransaccion getObjTipoTransaccion() {
 		return objTipoTransaccion;
 	}
 
 	/**
-	 * @param objTipoTransaccion the objTipoTransaccion to set
+	 * setObjTipoTransaccion
+	 * @param objTipoTransaccion Tipo de transaccion.
 	 */
 	public void setObjTipoTransaccion(TipoTransaccion objTipoTransaccion) {
 		this.objTipoTransaccion = objTipoTransaccion;

@@ -49,7 +49,7 @@ public class MultiEjemplar {
 		ResultSet rs;
 		Ejemplar ejemplar;
 		
-		sql = "SELECT * FROM TEjemplar;";
+		sql = "SELECT * FROM TEjemplar ORDER BY codigo;";
 		rs = Conector.getConector().ejecutarSQL(sql, true);
 		
 		if (rs.next()) {

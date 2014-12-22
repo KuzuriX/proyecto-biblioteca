@@ -81,6 +81,36 @@ public class MultiTransaccion {
 		return lista;
 	}
 	
+	public Vector<Transaccion> buscarPorIdUsuario(String pid) 
+			throws java.sql.SQLException,Exception {
+		Vector<Transaccion> lista = new Vector<Transaccion>();
+		Transaccion transaccion = null;
+		ResultSet rs;
+		String sql;
+		
+		sql = "SELECT * FROM TTransaccion WHERE idusuario = '" + pid + "' " +
+				"AND (tipo=3 OR tipo=4) ORDER BY fecha ASC;";
+		rs = Conector.getConector().ejecutarSQL(sql,true);
+		
+		if (rs.next()){
+			do {
+				transaccion = new Transaccion(
+						rs.getInt("id"),
+						rs.getInt("tipo"),
+						LocalDate.parse(rs.getString("fecha")),
+						rs.getString("descripcion"),
+						rs.getString("idEjemplar"),
+						rs.getString("idUsuario"));
+				lista.add(transaccion);				
+			} while(rs.next());
+		} else {
+			throw new Exception ("No hay transacciones realizadas a ese ejemplar.");
+		}
+		rs.close();
+		
+		return lista;
+	}
+	
 	public void eliminar(Transaccion ptransaccion) throws java.sql.SQLException,Exception{
 		String sql;
 		sql= "DELETE FROM TTransaccion WHERE id='" + ptransaccion.getId() + "'";
