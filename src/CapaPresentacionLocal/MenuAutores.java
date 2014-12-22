@@ -113,7 +113,7 @@ public class MenuAutores extends Menu {
 	}
     
 	public void eliminarAutor() throws IOException {
-		out.println("Ingrese la identifacion del autor: ");
+		out.println("Ingrese la identificacion del autor: ");
     	String pid = in.readLine();
     	
     	try {

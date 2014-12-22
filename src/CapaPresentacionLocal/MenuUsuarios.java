@@ -118,7 +118,7 @@ public class MenuUsuarios extends Menu {
 	}
     
 	public void eliminarUsuario() throws IOException {
-		out.println("Ingrese la identifacion del usuario: ");
+		out.println("Ingrese la identificacion del usuario: ");
     	String pid = in.readLine();
     	
     	try {

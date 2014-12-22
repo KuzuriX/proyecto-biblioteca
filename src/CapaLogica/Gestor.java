@@ -57,7 +57,47 @@ public class Gestor {
 	}
 
 	/* -------------------------- Descriptor -------------------------- */
+	public void crearDescriptor(String pcodigo, String pdescripcion) throws Exception {
+		
+		Descriptor descriptor;
+		descriptor = (new MultiDescriptor()).crear(pcodigo, pdescripcion);
+	}
 	
+	public void modificarDescriptor(String pcodigo, String pdescripcion) throws Exception {
+		
+		Descriptor descriptor;
+		descriptor = (new MultiDescriptor()).buscar(pcodigo);
+
+		descriptor.setCodigo(pcodigo);
+		descriptor.setDescripcion(pdescripcion);
+		
+		(new MultiDescriptor()).modificar(descriptor);
+	}
+	
+	public void eliminarDescriptor(String pid) throws Exception {
+		Descriptor descriptor;
+		descriptor = (new MultiDescriptor()).buscar(pid);
+		
+		(new MultiDescriptor()).eliminar(descriptor);
+	}
+	
+	public Vector listarDescriptores() throws Exception {
+		Descriptor descriptor;
+		Vector lista = new Vector();		
+		Vector descriptores = (new MultiDescriptor()).listar();
+		
+		for (int i = 0; i < descriptores.size(); i++) {
+			descriptor = ((Descriptor) descriptores.get(i));
+			TreeMap datos = new TreeMap();
+			
+			datos.put("codigo", descriptor.getCodigo());
+			datos.put("descripcion", descriptor.getDescripcion());
+			
+			lista.add(datos);
+		}
+		
+		return lista;
+	}
 	
 	/* -------------------------- Usuario -------------------------- */
 	public void crearUsuario(String pid, String pnombre, String papellido, String pdirElectronica, 

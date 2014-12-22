@@ -6,6 +6,7 @@ public class IU extends Menu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream out = System.out;
     static MenuAutores menuAutores = new MenuAutores();
+    static MenuDescriptores menuDescriptores = new MenuDescriptores();
     static MenuUsuarios menuUsuarios = new MenuUsuarios();
 
     public static void main(String[] args) throws java.io.IOException {
@@ -14,9 +15,9 @@ public class IU extends Menu {
         String[] listaMenu = {
         		"1.  Autores",
         		"2.  Descriptores",
-        		"3.  Usuarios",
-        		"4.  Libros",
-        		"5.  Ejemplares",
+        		"3.  Libros",
+        		"4.  Ejemplares",
+        		"5.  Usuarios",
                 "0.  Salir"
         };
 
@@ -31,8 +32,11 @@ public class IU extends Menu {
 	            case 1:
 	                menuAutores.mostrarMenu();
 	                break;
+	            case 2:
+	                menuDescriptores.mostrarMenu();
+	                break;
 	                
-	            case 3:
+	            case 5:
 	                menuUsuarios.mostrarMenu();
 	                break;
 	                
