@@ -174,7 +174,6 @@ public class MenuLibros extends Menu {
 			}			
 			out.println("");
 		} catch (Exception e) {
-System.out.println(e);
 			mostrarMensaje("No se encontraron libros registrados.");
 		}
 	}

@@ -10,6 +10,7 @@ public class IU extends Menu {
     static MenuDescriptores menuDescriptores = new MenuDescriptores();
     static MenuLibros menuLibros = new MenuLibros();
     static MenuUsuarios menuUsuarios = new MenuUsuarios();
+    static MenuEjemplares menuEjemplares = new MenuEjemplares();
 
     public static void main(String[] args) throws java.io.IOException {
         int opcion;
@@ -39,6 +40,9 @@ public class IU extends Menu {
 	                break;
 	            case 3:
 	                menuLibros.mostrarMenu();
+	                break;
+	            case 4:
+	                menuEjemplares.mostrarMenu();
 	                break;
 	            case 5:
 	                menuUsuarios.mostrarMenu();

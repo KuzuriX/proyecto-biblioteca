@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Ejemplar {
 	private String codigo;
-	private String estadoFisico;
+	private String estadoFisico; // 0: Excelente, 1: Bueno, 2: Malo
 	private LocalDate fechaIngreso;
 	private String condicionActual;
 	// Atributos de relaciones
@@ -14,7 +14,8 @@ public class Ejemplar {
 	// Persistencia
 	private String idLibro;
 	
-	public Ejemplar(String pidLibro, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, String pcondicionActual){
+	public Ejemplar(String pidLibro, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, 
+			String pcondicionActual) {
 		setIdLibro(pidLibro);
 		setCodigo(pcodigo);
 		setEstadoFisico(pestadoFisico);

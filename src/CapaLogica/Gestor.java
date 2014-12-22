@@ -324,9 +324,84 @@ public class Gestor {
 	
 	/* -------------------------- Ejemplar -------------------------- */
 	
-	public void ejemplarAgregar(String pidEjemplar, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, String pcondicionActual) throws Exception {
+	public void crearEjemplar(String pisbn, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, 
+			String pcondicionActual) throws Exception {
 		Ejemplar ejemplar;
-		ejemplar = (new MultiEjemplar()).crear(pidEjemplar, pcodigo, pestadoFisico, pfechaIngreso, pcondicionActual);
+		ejemplar = (new MultiEjemplar()).crear(pisbn, pcodigo, pestadoFisico, pfechaIngreso, pcondicionActual);
+	}
+	
+	public void modificarEjemplar(String pisbn, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, 
+			String pcondicionActual) throws Exception {
+		
+		Ejemplar ejemplar;
+		ejemplar = (new MultiEjemplar()).buscar(pcodigo);
+
+		ejemplar.setIdLibro(pisbn);
+		ejemplar.setEstadoFisico(pestadoFisico);
+		ejemplar.setFechaIngreso(pfechaIngreso);
+		ejemplar.setCondicionActual(pcondicionActual);
+		
+		(new MultiEjemplar()).modificar(ejemplar);
+	}
+	
+	public void eliminarEjemplar(String pcodigo) throws Exception {
+		Ejemplar ejemplar;
+		ejemplar = (new MultiEjemplar()).buscar(pcodigo);
+		
+		(new MultiEjemplar()).eliminar(ejemplar);
+	}
+	
+	public Vector listarEjemplares() throws Exception {
+		Ejemplar ejemplar;
+		Libro libro;
+		Autor autor;
+		Descriptor descriptor;
+		Vector autores;
+		Vector descriptores;
+		Vector ejemplares = (new MultiEjemplar()).listar();
+		Vector lista = new Vector();	
+		
+		for (int i = 0; i < ejemplares.size(); i++) {
+			ejemplar = ((Ejemplar) ejemplares.get(i));
+			TreeMap datos = new TreeMap();
+			
+			datos.put("idLibro", ejemplar.getIdLibro());
+			datos.put("codigo", ejemplar.getCodigo());
+			datos.put("estadoFisico", ejemplar.getEstadoFisico());
+			datos.put("fechaIngreso", ejemplar.getFechaIngreso());
+			datos.put("condicionActual", ejemplar.getCondicionActual());			
+			
+			// Obtener el libro al que pertenece
+			libro = ejemplar.obtenerLibro();
+			datos.put("isbn", libro.getISBN());
+			datos.put("titulo", libro.getTitulo());
+			datos.put("volumen", libro.getVolumen());
+			datos.put("editorial", libro.getEditorial());
+			datos.put("fechaPublicacion", libro.getFechaPublicacion());
+			datos.put("tipo", libro.getTipo());
+			
+			// Obtener los autores
+			autores = libro.obtenerAutores();
+			ArrayList<String> idsAutores = new ArrayList<String>();
+			for (int j = 0; j < autores.size(); j++) {
+				autor = (Autor) autores.get(j);
+				idsAutores.add(autor.getNombre() + " " + autor.getApellido());
+			}
+			datos.put("idsAutores", idsAutores);
+
+			// Obtener los descriptores
+			descriptores = libro.obtenerDescriptores();
+			ArrayList<String> idsDescriptores = new ArrayList<String>();
+			for (int j = 0; j < descriptores.size(); j++) {
+				descriptor = (Descriptor) descriptores.get(j);
+				idsDescriptores.add(descriptor.getDescripcion());
+			}
+			datos.put("idsDescriptores", idsDescriptores);
+			
+			lista.add(datos);
+		}
+		
+		return lista;
 	}
 	
 	public TreeMap ejemplarBuscar(String pcodigo) throws Exception {

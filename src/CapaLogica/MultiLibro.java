@@ -22,25 +22,41 @@ public class MultiLibro {
 		return libro;
 	}
 	
-	public Libro buscar(String pisbn) throws
-			java.sql.SQLException,Exception{
+	public Libro buscar(String pisbn) throws java.sql.SQLException,Exception{
 		Libro libro = null;
-		java.sql.ResultSet rs;
+		java.sql.ResultSet rs, rsAutores, rsDescriptores;
 		String sql;
 		
-		sql = "SELECT * "+
-		"FROM TLibro "+
-		"WHERE isbn='"+pisbn+"';";
+		sql = "SELECT * FROM TLibro WHERE isbn='"+pisbn+"';";
 		rs = Conector.getConector().ejecutarSQL(sql,true);
 		
 		if (rs.next()){
+			LocalDate fechaPublicacion = LocalDate.parse(rs.getString("fechaPublicacion"));
 			libro = new Libro(
 				rs.getString("isbn"),
 				rs.getString("titulo"),
 				rs.getInt("volumen"),
 				rs.getString("editorial"),
-				LocalDate.parse(rs.getString("fechaPublicacion")),
+				fechaPublicacion,
 				rs.getString("tipo"));
+			
+			// Obtener los autores del libro.
+			sql = "SELECT idautor FROM TAutoresXLibro;";
+			rsAutores = Conector.getConector().ejecutarSQL(sql, true);				
+			if (rsAutores.next()) {
+				do {
+					libro.asignarAutor(rsAutores.getString("idautor"));
+				} while (rsAutores.next());
+			}
+			
+			// Obtener los descriptores del libro.
+			sql = "SELECT iddescriptor FROM TDescriptoresXLibro;";
+			rsDescriptores = Conector.getConector().ejecutarSQL(sql, true);				
+			if (rsDescriptores.next()) {
+				do {
+					libro.asignarDescriptor(rsDescriptores.getString("iddescriptor"));
+				} while (rsDescriptores.next());
+			}			
 		} else {
 			throw new Exception ("El libro no est� registrado en el sistema.");
 		}
@@ -71,7 +87,7 @@ public class MultiLibro {
 				libros.add(libro);
 			} while (rs.next());
 		} else {
-			throw new Exception ("No hay clientes con ese nombre.");
+			throw new Exception ("No hay libros con ese titulo.");
 		}
 		rs.close();
 		return libros;
