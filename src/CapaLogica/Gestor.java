@@ -1,5 +1,6 @@
 package CapaLogica;
 
+import java.time.LocalDate;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -59,4 +60,63 @@ public class Gestor {
 	
 	/* -------------------------- Usuario -------------------------- */
 	
+	/* -------------------------- Libro -------------------------- */
+	
+	public void libroAgregar(String pisbn, String ptitulo, int pvolumen, String peditorial, LocalDate pfechaPublicacion, String ptipo) throws Exception {
+		Libro libro;
+		libro = (new MultiLibro()).crear(pisbn, ptitulo, pvolumen, peditorial, pfechaPublicacion, ptipo);
+	}
+	
+	public TreeMap libroBuscar(String pisbn) throws Exception {
+		TreeMap datos = null;
+		Libro libro=null;
+		String nombre;
+		datos = new TreeMap();
+		libro = (new MultiLibro()).buscar(pisbn);
+		datos.put("titulo", libro.getTitulo());
+		datos.put("volumen", libro.getVolumen());
+		datos.put("editorial", libro.getEditorial());
+		datos.put("fechaPublicacion", libro.getFechaPublicacion());
+		datos.put("tipo", libro.obtenerTipo());
+		return datos;
+	}
+	
+	public Vector libroBuscarPorTitulo(String ptitulo) throws Exception {
+		Vector libros=null;
+		Vector datosLibros=null;
+		Libro libro;
+		libros = (new MultiLibro()).buscarPorNombre(ptitulo);
+		datosLibros = new Vector();
+		for (int i=0; i<libros.size(); i++) {
+			libro = ((Libro) libros.get(i));
+			TreeMap datosLibro = new TreeMap();
+			datosLibro.put("titulo", libro.getTitulo());
+			datosLibro.put("volumen", libro.getVolumen());
+			datosLibro.put("editorial", libro.getEditorial());
+			datosLibro.put("fechaPublicacion", libro.getFechaPublicacion());
+			datosLibro.put("tipo", libro.obtenerTipo());
+			datosLibros.add(datosLibro);
+		}
+		return datosLibros;
+	}
+	
+	/* -------------------------- Ejemplar -------------------------- */
+	
+	public void ejemplarAgregar(String pidEjemplar, String pcodigo, String pestadoFisico, LocalDate pfechaIngreso, String pcondicionActual) throws Exception {
+		Ejemplar ejemplar;
+		ejemplar = (new MultiEjemplar()).crear(pidEjemplar, pcodigo, pestadoFisico, pfechaIngreso, pcondicionActual);
+	}
+	
+	public TreeMap ejemplarBuscar(String pcodigo) throws Exception {
+		TreeMap datos = null;
+		Ejemplar ejemplar=null;
+		String nombre;
+		datos = new TreeMap();
+		ejemplar = (new MultiEjemplar()).buscar(pcodigo);
+		datos.put("codigo", ejemplar.getCodigo());
+		datos.put("estadoFisico", ejemplar.getEstadoFisico());
+		datos.put("fechaIngreso", ejemplar.getFechaIngreso());
+		datos.put("condicionActual", ejemplar.getCondicionActual());
+		return datos;
+	}
 }

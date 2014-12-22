@@ -1,6 +1,7 @@
 package CapaLogica;
 
 import java.time.LocalDate;
+import java.util.Vector;
 
 import CapaAccesoBD.Conector;
 
@@ -42,6 +43,35 @@ public class MultiLibro {
 		}
 		rs.close();
 		return libro;
+	}
+	
+	public  Vector buscarPorNombre(String ptitulo) throws 
+		java.sql.SQLException,Exception{
+		Libro libro=null;
+		Vector libros=null;
+		java.sql.ResultSet rs;
+		String sql;
+		sql = "SELECT * "+
+		"FROM TLibro "+
+		"WHERE titulo LIKE '%"+ptitulo+"%';";
+		rs = Conector.getConector().ejecutarSQL(sql,true);
+		libros = new Vector ();
+		if (rs.next()) {
+			do {
+				libro = new Libro(
+						rs.getString("isbn"),
+						rs.getString("titulo"),
+						rs.getInt("volumen"),
+						rs.getString("editorial"),
+						LocalDate.parse(rs.getString("fechaPublicacion")),
+						rs.getString("tipo"));
+				libros.add(libro);
+			} while (rs.next());
+		} else {
+			throw new Exception ("No hay clientes con ese nombre.");
+		}
+		rs.close();
+		return libros;
 	}
 	
 	public  void actualizar(Libro plibro) throws 
