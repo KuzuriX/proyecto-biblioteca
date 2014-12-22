@@ -352,10 +352,10 @@ public class Gestor {
 	}
 	
 	public Vector listarEjemplares() throws Exception {
-		Ejemplar ejemplar;
-		Libro libro;
-		Autor autor;
-		Descriptor descriptor;
+		Ejemplar ejemplar = null;
+		Libro libro = null;
+		Autor autor = null;
+		Descriptor descriptor = null;
 		Vector autores;
 		Vector descriptores;
 		Vector ejemplares = (new MultiEjemplar()).listar();
@@ -404,16 +404,90 @@ public class Gestor {
 		return lista;
 	}
 	
-	public TreeMap ejemplarBuscar(String pcodigo) throws Exception {
+	public TreeMap buscarEjemplar(String pcodigo) throws Exception {
+		Ejemplar ejemplar = (new MultiEjemplar()).buscar(pcodigo);
+		return obtenerDatosEjemplar(ejemplar);
+	}
+	
+	public TreeMap buscarEjemplarPorISBN(String pisbn) throws Exception {
+		Ejemplar ejemplar = (new MultiEjemplar()).buscarPorISBN(pisbn);
+		return obtenerDatosEjemplar(ejemplar);
+	}
+	
+	public Vector buscarEjemplarPorTitulo(String ptitulo) throws Exception {
+		Vector<Ejemplar> ejemplares = (new MultiEjemplar()).buscarPorTitulo(ptitulo);
+		Vector resultados = new Vector();
+
+		for (int i = 0; i < ejemplares.size(); i++) {
+			resultados.add(obtenerDatosEjemplar(ejemplares.get(i)));
+		}
+		
+		return resultados;
+	}
+	
+	public Vector buscarEjemplarPorAutor(String pautor) throws Exception {
+		Vector<Ejemplar> ejemplares = (new MultiEjemplar()).buscarPorAutor(pautor);
+		Vector resultados = new Vector();
+
+		for (int i = 0; i < ejemplares.size(); i++) {
+			resultados.add(obtenerDatosEjemplar(ejemplares.get(i)));
+		}
+		
+		return resultados;
+	}
+	
+	public Vector buscarEjemplarPorDescriptor(String pdescriptor) throws Exception {
+		Vector<Ejemplar> ejemplares = (new MultiEjemplar()).buscarPorDescriptor(pdescriptor);
+		Vector resultados = new Vector();
+
+		for (int i = 0; i < ejemplares.size(); i++) {
+			resultados.add(obtenerDatosEjemplar(ejemplares.get(i)));
+		}
+		
+		return resultados;
+	}
+	
+	private TreeMap obtenerDatosEjemplar(Ejemplar ejemplar) throws Exception {
 		TreeMap datos = null;
-		Ejemplar ejemplar=null;
-		String nombre;
-		datos = new TreeMap();
-		ejemplar = (new MultiEjemplar()).buscar(pcodigo);
+		Libro libro = null;
+		Autor autor = null;
+		Descriptor descriptor = null;
+		Vector autores;
+		Vector descriptores;
+		
+		datos = new TreeMap();		
 		datos.put("codigo", ejemplar.getCodigo());
 		datos.put("estadoFisico", ejemplar.getEstadoFisico());
 		datos.put("fechaIngreso", ejemplar.getFechaIngreso());
 		datos.put("condicionActual", ejemplar.getCondicionActual());
+		
+		// Obtener el libro al que pertenece
+		libro = ejemplar.obtenerLibro();
+		datos.put("isbn", libro.getISBN());
+		datos.put("titulo", libro.getTitulo());
+		datos.put("volumen", libro.getVolumen());
+		datos.put("editorial", libro.getEditorial());
+		datos.put("fechaPublicacion", libro.getFechaPublicacion());
+		datos.put("tipo", libro.getTipo());
+		
+		// Obtener los autores
+		autores = libro.obtenerAutores();
+		ArrayList<String> idsAutores = new ArrayList<String>();
+		for (int j = 0; j < autores.size(); j++) {
+			autor = (Autor) autores.get(j);
+			idsAutores.add(autor.getNombre() + " " + autor.getApellido());
+		}
+		datos.put("idsAutores", idsAutores);
+		
+		// Obtener los descriptores
+		descriptores = libro.obtenerDescriptores();
+		ArrayList<String> idsDescriptores = new ArrayList<String>();
+		for (int j = 0; j < descriptores.size(); j++) {
+			descriptor = (Descriptor) descriptores.get(j);
+			idsDescriptores.add(descriptor.getDescripcion());
+		}
+		datos.put("idsDescriptores", idsDescriptores);
+		
 		return datos;
 	}
 }

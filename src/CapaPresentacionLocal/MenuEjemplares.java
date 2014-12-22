@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Vector;
 
+import CapaLogica.Ejemplar;
 import CapaLogica.Gestor;
 
 public class MenuEjemplares extends Menu {
@@ -17,6 +18,11 @@ public class MenuEjemplares extends Menu {
         		"2. Modificar ejemplar",
         		"3. Eliminar ejemplar",
         		"4. Listar ejemplares",
+        		"5. Consultar ejemplar por codigo",
+        		"6. Consultar ejemplar por ISBN",
+        		"7. Consultar ejemplar por titulo",
+        		"8. Consultar ejemplar por autor",
+        		"9. Consultar ejemplar por descriptor",
                 "0. Volver al menu principal"
         };
 
@@ -46,6 +52,21 @@ public class MenuEjemplares extends Menu {
                 break;            
             case 4:
                 listarEjemplares();
+                break;
+            case 5:
+                consultarEjemplarPorCodigo();
+                break;
+            case 6:
+                consultarEjemplarPorISBN();
+                break;
+            case 7:
+                consultarEjemplarPorTitulo();
+                break;
+            case 8:
+                consultarEjemplarPorAutor();
+                break;
+            case 9:
+                consultarEjemplarPorDescriptor();
                 break;
             case 0: 
             	volver = true;
@@ -210,46 +231,143 @@ public class MenuEjemplares extends Menu {
 			out.println("-----------------------------------------------------------------");
 			
 			for (int i = 0; i < ejemplares.size(); i++) {
-				datosEjemplar = ((TreeMap) ejemplares.get(i));				
-				
-				out.println("Codigo: \t\t" + datosEjemplar.get("codigo"));
-				out.println("Estado Fisico: \t\t" + datosEjemplar.get("estadoFisico"));
-				out.println("Fecha ingreso: \t\t" + datosEjemplar.get("fechaIngreso"));
-				out.println("Condicion actual: \t" + datosEjemplar.get("condicionActual"));
-				out.println();
-				
-				// Imprimir la informacion del libro
-				out.println("Es un ejemplar del libro:");
-				out.println("\tISBN: \t\t\t" + datosEjemplar.get("isbn"));
-				out.println("\tTitulo: \t\t" + datosEjemplar.get("titulo"));
-				out.println("\tVolumen: \t\t" + datosEjemplar.get("volumen"));
-				out.println("\tEditorial: \t\t" + datosEjemplar.get("editorial"));
-				out.println("\tFecha de publicacion: \t" + datosEjemplar.get("fechaPublicacion"));
-				out.println("\tTipo: \t\t\t" + datosEjemplar.get("tipo"));
-				
-				// Imprimir el autor(es) del libro
-				ArrayList<String> autores = (ArrayList<String>) datosEjemplar.get("idsAutores");
-				String listaAutores = "";
-				for (int j = 0; j < autores.size(); j++) {
-					listaAutores += autores.get(j) + " / ";
-				}
-				out.println("\tAutores:\t\t" + listaAutores);
-				
-				// Imprimir el descriptor(es) del libro
-				ArrayList<String> descriptores = (ArrayList<String>) datosEjemplar.get("idsDescriptores");
-				String listaDescriptores = "";
-				for (int k = 0; k < descriptores.size(); k++) {
-					listaDescriptores += descriptores.get(k) + " / ";
-				}
-				out.println("\tDescriptores:\t\t" + listaDescriptores);
-				
-				out.println("-----------------------------------------------------------------");
-			}			
-			out.println();
+				datosEjemplar = ((TreeMap) ejemplares.get(i));
+				imprimirEjemplar(datosEjemplar);
+			}
 		} catch (Exception e) {
 			out.println(e);
 			mostrarMensaje("No se encontraron ejemplares registrados.");
 		}
+	}
+	
+	public void consultarEjemplarPorCodigo() throws IOException {
+		out.println("Ingrese el codigo del ejemplar a buscar: ");
+    	String codigo = in.readLine();
+		
+		try {
+			TreeMap datosEjemplar = (new Gestor()).buscarEjemplar(codigo);
+			
+			out.println("");
+			out.println("BUSQUEDA DE EJEMPLAR POR CODIGO: " + codigo);
+			out.println("-----------------------------------------------------------------");				
+			imprimirEjemplar(datosEjemplar);
+		} catch (Exception e) {
+			out.println(e);
+			mostrarMensaje("No se encontro el ejemplar consultado.");
+		}
+	}
+	
+	public void consultarEjemplarPorISBN() throws IOException {
+		out.println("Ingrese el ISBN del ejemplar a buscar: ");
+    	String isbn = in.readLine();
+		
+		try {
+			TreeMap datosEjemplar = (new Gestor()).buscarEjemplarPorISBN(isbn);
+			
+			out.println("");
+			out.println("BUSQUEDA DE EJEMPLAR POR IBSN: " + isbn);
+			out.println("-----------------------------------------------------------------");				
+			imprimirEjemplar(datosEjemplar);
+		} catch (Exception e) {
+			out.println(e);
+			mostrarMensaje("No se encontro el ejemplar consultado.");
+		}
+	}
+	
+	public void consultarEjemplarPorTitulo() throws IOException {
+		out.println("Ingrese el titulo del ejemplar a buscar: ");
+    	String titulo = in.readLine();
+		
+		try {
+			Vector resultados = (new Gestor()).buscarEjemplarPorTitulo(titulo);
+			
+			out.println("");
+			out.println("BUSQUEDA DE EJEMPLAR POR TITULO: '" + titulo + "'");
+			out.println("Resultados encontrados: " + resultados.size());
+			out.println("-----------------------------------------------------------------");
+			for (int i = 0; i < resultados.size(); i++) {
+				imprimirEjemplar((TreeMap) resultados.get(i));
+			}
+			
+		} catch (Exception e) {
+			out.println(e);
+			mostrarMensaje("No se encontro el ejemplar consultado.");
+		}
+	}
+	
+	public void consultarEjemplarPorAutor() throws IOException {
+		out.println("Ingrese el nombre del autor del ejemplar a buscar: ");
+    	String autor = in.readLine();
+		
+		try {
+			Vector resultados = (new Gestor()).buscarEjemplarPorAutor(autor);
+			
+			out.println("");
+			out.println("BUSQUEDA DE EJEMPLAR POR AUTOR: '" + autor + "'");
+			out.println("Resultados encontrados: " + resultados.size());
+			out.println("-----------------------------------------------------------------");
+			for (int i = 0; i < resultados.size(); i++) {
+				imprimirEjemplar((TreeMap) resultados.get(i));
+			}
+		} catch (Exception e) {
+			out.println(e);
+			mostrarMensaje("No se encontro el ejemplar consultado.");
+		}
+	}
+	
+	public void consultarEjemplarPorDescriptor() throws IOException {
+		out.println("Ingrese el descriptor (descripcion) del ejemplar a buscar: ");
+    	String descriptor = in.readLine();
+		
+		try {
+			Vector resultados = (new Gestor()).buscarEjemplarPorDescriptor(descriptor);
+			
+			out.println("");
+			out.println("BUSQUEDA DE EJEMPLAR POR DESCRIPTOR: '" + descriptor + "'");
+			out.println("Resultados encontrados: " + resultados.size());
+			out.println("-----------------------------------------------------------------");
+			for (int i = 0; i < resultados.size(); i++) {
+				imprimirEjemplar((TreeMap) resultados.get(i));
+			}
+		} catch (Exception e) {
+			out.println(e);
+			mostrarMensaje("No se encontro el ejemplar consultado.");
+		}
+	}
+	
+	private void imprimirEjemplar(TreeMap datosEjemplar) {
+		out.println("Codigo: \t\t" + datosEjemplar.get("codigo"));
+		out.println("Estado Fisico: \t\t" + datosEjemplar.get("estadoFisico"));
+		out.println("Fecha ingreso: \t\t" + datosEjemplar.get("fechaIngreso"));
+		out.println("Condicion actual: \t" + datosEjemplar.get("condicionActual"));
+		out.println();
+			
+		// Imprimir la informacion del libro
+		out.println("Es un ejemplar del libro:");
+		out.println("\tISBN: \t\t\t" + datosEjemplar.get("isbn"));
+		out.println("\tTitulo: \t\t" + datosEjemplar.get("titulo"));
+		out.println("\tVolumen: \t\t" + datosEjemplar.get("volumen"));
+		out.println("\tEditorial: \t\t" + datosEjemplar.get("editorial"));
+		out.println("\tFecha de publicacion: \t" + datosEjemplar.get("fechaPublicacion"));
+		out.println("\tTipo: \t\t\t" + datosEjemplar.get("tipo"));
+			
+		// Imprimir el autor(es) del libro
+		ArrayList<String> autores = (ArrayList<String>) datosEjemplar.get("idsAutores");
+		String listaAutores = "";
+		for (int j = 0; j < autores.size(); j++) {
+			listaAutores += autores.get(j) + " / ";
+		}
+		out.println("\tAutores:\t\t" + listaAutores);
+			
+		// Imprimir el descriptor(es) del libro
+		ArrayList<String> descriptores = (ArrayList<String>) datosEjemplar.get("idsDescriptores");
+		String listaDescriptores = "";
+		for (int k = 0; k < descriptores.size(); k++) {
+			listaDescriptores += descriptores.get(k) + " / ";
+		}
+		out.println("\tDescriptores:\t\t" + listaDescriptores);
+		out.println("-----------------------------------------------------------------");			
+		out.println();
 	}
 }
 
