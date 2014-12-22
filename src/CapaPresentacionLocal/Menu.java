@@ -9,8 +9,6 @@ public class Menu {
     static PrintStream out = System.out;
     
 	static void mostrarMenu(String[] plista) {
-        out.println();
-
         for (int i=0;i<plista.length;i++) {
             out.println(plista[i]);
         }

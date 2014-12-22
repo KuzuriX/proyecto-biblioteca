@@ -37,7 +37,7 @@ public class Gestor {
 	public Vector listarAutores() throws Exception {
 		Autor autor;
 		Vector listaAutores = new Vector();		
-		Vector autores = (new MultiAutor()).listarAutores();
+		Vector autores = (new MultiAutor()).listar();
 		
 		for (int i = 0; i < autores.size(); i++) {
 			autor = ((Autor) autores.get(i));
@@ -57,6 +57,58 @@ public class Gestor {
 
 	/* -------------------------- Descriptor -------------------------- */
 	
-	/* -------------------------- Usuario -------------------------- */
 	
+	/* -------------------------- Usuario -------------------------- */
+	public void crearUsuario(String pid, String pnombre, String papellido, String pdirElectronica, 
+			String pdireccion, String ptelefono) throws Exception {
+		
+		Usuario usuario;
+		usuario = (new MultiUsuario()).crear(pid, pnombre, papellido, pdirElectronica, pdireccion, ptelefono, "normal");
+	}
+	
+	public void modificarUsuario(String pid, String pnombre, String papellido, String pdirElectronica, 
+			String pdireccion, String ptelefono, String pestado) throws Exception {
+		
+		Usuario usuario;
+		usuario = (new MultiUsuario()).buscar(pid);
+
+		usuario.setNombre(pnombre);
+		usuario.setApellido(papellido);
+		usuario.setDirElectronica(pdirElectronica);
+		usuario.setDireccion(pdireccion);
+		usuario.setTelefono(ptelefono);
+		usuario.setEstado(pestado);
+		
+		(new MultiUsuario()).modificar(usuario);
+	}
+	
+	public void eliminarUsuario(String pid) throws Exception {
+		Usuario usuario;
+		usuario = (new MultiUsuario()).buscar(pid);
+		
+		(new MultiUsuario()).eliminar(usuario);
+	}
+	
+	public Vector listarUsuarios() throws Exception {
+		Usuario usuario;
+		Vector lista = new Vector();		
+		Vector usuarios = (new MultiUsuario()).listar();
+		
+		for (int i = 0; i < usuarios.size(); i++) {
+			usuario = ((Usuario) usuarios.get(i));
+			TreeMap datos = new TreeMap();
+			
+			datos.put("id", usuario.getId());
+			datos.put("nombre", usuario.getNombre());
+			datos.put("apellido", usuario.getApellido());
+			datos.put("dirElectronica", usuario.getDirElectronica());
+			datos.put("direccion", usuario.getDireccion());
+			datos.put("telefono", usuario.getTelefono());
+			datos.put("estado", usuario.getEstado());
+			
+			lista.add(datos);
+		}
+		
+		return lista;
+	}
 }

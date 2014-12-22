@@ -6,6 +6,7 @@ public class IU extends Menu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream out = System.out;
     static MenuAutores menuAutores = new MenuAutores();
+    static MenuUsuarios menuUsuarios = new MenuUsuarios();
 
     public static void main(String[] args) throws java.io.IOException {
         int opcion;
@@ -20,12 +21,19 @@ public class IU extends Menu {
         };
 
         do {
+        	out.println();
+        	out.println(" MENU PRINCIPAL");
+        	out.println("---------------------------");
             mostrarMenu(listaMenu);
             opcion = leerOpcion();
             
             switch (opcion) {
 	            case 1:
-	                menuAutores.mostrarMenuAutores();
+	                menuAutores.mostrarMenu();
+	                break;
+	                
+	            case 3:
+	                menuUsuarios.mostrarMenu();
 	                break;
 	                
 	            case 0:

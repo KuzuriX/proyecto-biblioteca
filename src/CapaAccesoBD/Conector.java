@@ -27,7 +27,7 @@ public class Conector{
 	java.sql.SQLException,Exception{
 		if (conectorBD == null){			
 //			conectorBD = new AccesoBD("sun.jdbc.odbc.JdbcOdbcDriver","jdbc:odbc:BDLibros","","");
-			conectorBD = new AccesoBD("jdbc:ucanaccess:///Users/elizabeth/git/progra2-proyecto-biblioteca/PrBiblio/src/BaseDeDatos/BDLibros.accdb", "", "");
+			conectorBD = new AccesoBD("jdbc:ucanaccess:///Users/elizabeth/git/proyecto-biblioteca/src/BaseDeDatos/BDLibros.accdb", "", "");
 		}
 		return conectorBD;
 	}

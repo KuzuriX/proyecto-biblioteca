@@ -8,7 +8,7 @@ import CapaLogica.Autor;
 import CapaLogica.Gestor;
 
 public class MenuAutores extends Menu {
-	public void mostrarMenuAutores() throws java.io.IOException {
+	public void mostrarMenu() throws java.io.IOException {
         int opcion;
         boolean volver = false;
         String[] listaMenu = {
@@ -20,6 +20,9 @@ public class MenuAutores extends Menu {
         };
 
         do {
+        	out.println();
+        	out.println(" MENU AUTORES");
+        	out.println("---------------------------");
             mostrarMenu(listaMenu);
             opcion = leerOpcion();
             volver = ejecutarSeleccion(opcion);
@@ -55,7 +58,7 @@ public class MenuAutores extends Menu {
     }
 	
 	public void crearAutor() throws IOException {
-    	out.println("Ingrese la identifacion: ");
+    	out.println("Ingrese la identificacion: ");
     	String pid = in.readLine();
 
     	out.println("Ingrese el nombre: ");
@@ -82,7 +85,7 @@ public class MenuAutores extends Menu {
     }
     
 	public void modificarAutor() throws IOException {
-		out.println("Ingrese la identifacion del autor a modificar: ");
+		out.println("Ingrese la identificacion del autor a modificar: ");
     	String pid = in.readLine();
     	
     	out.println("Ingrese el nombre: ");
@@ -126,6 +129,7 @@ public class MenuAutores extends Menu {
 			Vector autores = (new Gestor()).listarAutores();
 			TreeMap datosAutor;
 			
+			out.println("LISTA DE AUTORES");
 			out.println("-----------------------------------------------------------------");
 			
 			for (int i = 0; i < autores.size(); i++) {

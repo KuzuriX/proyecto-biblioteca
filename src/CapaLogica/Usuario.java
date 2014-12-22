@@ -20,8 +20,7 @@ public class Usuario {
 	 * @param pestado			Estado del usuario. Puede ser "normal" o "moroso".
 	 */
 	public Usuario(String pid, String pnombre, String papellido,
-			String pdirElectronica, String pdireccion, String ptelefono,
-			String pestado) {
+			String pdirElectronica, String pdireccion, String ptelefono, String pestado) {
 		setId(pid);
 		setNombre(pnombre);
 		setApellido(papellido);

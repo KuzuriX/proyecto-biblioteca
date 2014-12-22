@@ -64,7 +64,7 @@ public class MultiAutor {
 		Conector.getConector().ejecutarSQL(sql);
 	}
 	
-	public Vector<Autor> listarAutores() throws java.sql.SQLException,Exception {
+	public Vector<Autor> listar() throws java.sql.SQLException,Exception {
 		Vector<Autor> listaAutores = new Vector<Autor>();
 		String sql;
 		ResultSet rs;
