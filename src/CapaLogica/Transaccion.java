@@ -95,8 +95,8 @@ public class Transaccion {
 		this.idUsuario = idUsuario;
 	}
 	
-	public Ejemplar obtenerEjemplar() {
-		ejemplar = (new MultiEjemplar()).buscar(idEjemplar);
+	public Ejemplar obtenerEjemplar() throws SQLException, Exception {
+		ejemplar = (new MultiEjemplar().buscar(idEjemplar));
 		return ejemplar;
 	}
 	
