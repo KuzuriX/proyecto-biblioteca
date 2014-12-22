@@ -163,6 +163,7 @@ public class Gestor {
 		
 		(new MultiUsuario()).modificar(usuario);
 	}
+
 	/* -------------------------- Libro -------------------------- */
 	
 	public void crearLibro(String pisbn, String ptitulo, int pvolumen, String peditorial, 
@@ -198,9 +199,11 @@ public class Gestor {
 	public Vector listarLibros() throws Exception {
 		Libro libro;
 		Autor autor;
+		Descriptor descriptor;
 		Vector lista = new Vector();		
 		Vector libros = (new MultiLibro()).listar();
 		Vector autores;
+		Vector descriptores;
 		
 		for (int i = 0; i < libros.size(); i++) {
 			libro = ((Libro) libros.get(i));
@@ -221,6 +224,15 @@ public class Gestor {
 				idsAutores.add(autor.getNombre() + " " + autor.getApellido());
 			}
 			datos.put("idsAutores", idsAutores);
+			
+			// Obtener los descriptores
+			descriptores = libro.obtenerDescriptores();
+			ArrayList<String> idsDescriptores = new ArrayList<String>();
+			for (int j = 0; j < descriptores.size(); j++) {
+				descriptor = (Descriptor) descriptores.get(j);
+				idsDescriptores.add(descriptor.getDescripcion());
+			}
+			datos.put("idsDescriptores", idsDescriptores);
 			
 			lista.add(datos);
 		}
@@ -246,6 +258,29 @@ public class Gestor {
 			}			
 		} else {
 			msg = "El autor no se encuentra registrado.";
+		}
+		
+		return msg;
+	}
+	
+	public String asociarDescriptorLibro(String pisbn, String pcodigoDescriptor) throws Exception {
+		String msg = "";
+		Descriptor descriptor;
+		Libro libro;
+		
+		descriptor = (new MultiDescriptor()).buscar(pcodigoDescriptor);
+		
+		if (descriptor != null) {
+			libro = (new MultiLibro()).buscar(pisbn);
+			
+			if (libro != null) {
+				(new MultiLibro()).asociarDescriptor(pisbn, pcodigoDescriptor);
+				msg = "El descriptor se asocio con exito al libro " + libro.getTitulo();
+			} else {
+				msg = "El libro no se encuentra registrado.";
+			}			
+		} else {
+			msg = "El descriptor no se encuentra registrado.";
 		}
 		
 		return msg;

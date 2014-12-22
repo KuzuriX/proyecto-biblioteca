@@ -52,6 +52,9 @@ public class MenuLibros extends Menu {
             case 5:
                 asociarAutorLibro();
                 break;
+            case 6:
+                asociarDescriptorLibro();
+                break;
             case 0: 
             	volver = true;
             	break;
@@ -158,7 +161,15 @@ public class MenuLibros extends Menu {
 				ArrayList<String> autores = (ArrayList<String>) datosLibro.get("idsAutores");
 				for (int j = 0; j < autores.size(); j++) {
 					out.println("\t\t\t" + autores.get(j));
-				}				
+				}
+				
+				// Imprimir el descriptor(es) del libro
+				out.println("Descriptores:");
+				ArrayList<String> descriptores = (ArrayList<String>) datosLibro.get("idsDescriptores");
+				for (int k = 0; k < descriptores.size(); k++) {
+					out.println("\t\t\t" + descriptores.get(k));
+				}
+				
 				out.println("-----------------------------------------------------------------");
 			}			
 			out.println("");
@@ -179,6 +190,20 @@ System.out.println(e);
 			mostrarMensaje((new Gestor()).asociarAutorLibro(pisbn, pidAutor));
 		} catch (Exception e) {
 			mostrarMensaje("No se pudo asociar el autor al libro.");
+		}
+	}
+	
+	public void asociarDescriptorLibro() throws IOException {
+		out.println("Ingrese el ISBN del libro: ");
+		String pisbn = in.readLine();
+
+    	out.println("Ingrese el codigo del descriptor: ");
+    	String pcodigoDesc = in.readLine();
+    	
+		try {
+			mostrarMensaje((new Gestor()).asociarDescriptorLibro(pisbn, pcodigoDesc));
+		} catch (Exception e) {
+			mostrarMensaje("No se pudo asociar el descriptor al libro.");
 		}
 	}
 }

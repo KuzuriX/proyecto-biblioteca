@@ -100,7 +100,7 @@ public class MultiLibro {
 	public Vector<Libro> listar() throws java.sql.SQLException,Exception {
 		Vector<Libro> lista = new Vector<Libro>();
 		String sql;
-		ResultSet rs, rsAutores;
+		ResultSet rs, rsAutores, rsDescriptores;
 		Libro libro;
 		
 		sql = "SELECT * FROM TLibro;";
@@ -117,13 +117,22 @@ public class MultiLibro {
 					fechaPublicacion,
 					rs.getString("tipo"));
 				
-				// Asociar los autores al libro.
+				// Obtener los autores del libro.
 				sql = "SELECT idautor FROM TAutoresXLibro;";
 				rsAutores = Conector.getConector().ejecutarSQL(sql, true);				
 				if (rsAutores.next()) {
 					do {
 						libro.asignarAutor(rsAutores.getString("idautor"));
 					} while (rsAutores.next());
+				}
+				
+				// Obtener los descriptores del libro.
+				sql = "SELECT iddescriptor FROM TDescriptoresXLibro;";
+				rsDescriptores = Conector.getConector().ejecutarSQL(sql, true);				
+				if (rsDescriptores.next()) {
+					do {
+						libro.asignarDescriptor(rsDescriptores.getString("iddescriptor"));
+					} while (rsDescriptores.next());
 				}
 				
 				lista.add(libro);
@@ -146,6 +155,19 @@ public class MultiLibro {
 			Conector.getConector().ejecutarSQL(sql);
 		} catch (Exception e) {
 			throw new Exception ("No se pudo asociar el autor al libro.");
+		}		
+	}
+	
+	public void asociarDescriptor(String pisbn, String pcodigoDesc) 
+			throws java.sql.SQLException, Exception {
+		String sql;
+		
+		sql="INSERT INTO TDescriptoresXLibro (iddescriptor, idlibro) VALUES ('" + pcodigoDesc +"','"+ pisbn +"');";
+		
+		try {
+			Conector.getConector().ejecutarSQL(sql);
+		} catch (Exception e) {
+			throw new Exception ("No se pudo asociar el descriptor al libro.");
 		}		
 	}
 }
