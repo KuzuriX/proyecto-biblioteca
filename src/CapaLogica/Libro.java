@@ -33,7 +33,7 @@ public class Libro {
 		setVolumen(pvolumen);
 		setEditorial(peditorial);
 		setFechaPublicacion(pfechaPublicacion);
-		setTipo(ptipo);
+		//setTipo(ptipo);
 		
 		listaAutores = null;
 		listaDescriptores = null;
@@ -169,7 +169,7 @@ public class Libro {
 	
 	public Vector<Ejemplar> obtenerEjemplares() {
 		for (int i = 0; i < idsDescriptores.size(); i++) {
-			listaEjemplares.add((new MultiEjemplar()).buscar(idsDescriptores.get(i)));
+			//listaEjemplares.add((new MultiEjemplar()).buscar(idsDescriptores.get(i)));
 		}
 		
 		return listaEjemplares;

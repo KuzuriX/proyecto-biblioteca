@@ -1,0 +1,775 @@
+<html>
+	<head>
+		<title>Proyecto 3: Sistema de Información para Biblioteca "DuermaPoco LeaMas"</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/bootswatch.min.css">
+		<link rel="stylesheet" type="text/css" href="css/biblioteca.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="index.html">
+	          	<span class="sistema">Sistema de Información para</span>
+	          	<span class="biblioteca">Biblioteca</span>
+	          </a>
+	        </div>
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="index.html">Inicio</a></li>
+	            <li><a href="descProblema.html">Descripción</a></li>
+	            <li class="active"><a href="requerContexto.html">Requerimientos</a></li>
+	            <!-- <li><a href="diagCasosUso.html">Diagrama Casos de Uso</a></li> -->
+	            <li><a href="casosExpandidos.html">Casos Expandidos</a></li>
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Diagramas <span class="caret"></span></a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li><a href="diagClases.html">Diagrama de Clases</a></li>
+	                <li><a href="diagSecuencias.html">Diagramas de Secuencia</a></li>
+	              </ul>
+	            </li>
+	            <li><a href="modeloER.html">Modelo Entidad-Relación</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+
+	    <div class="container requerimientos">
+	    	<div class="page-header row">
+	    		<div class="col-lg-12">
+	    			<h1>Requerimientos</h1>
+	    		</div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-lg-12">
+	    			<a class="anchor" name="go-top"></a>
+	    			<ul>
+	    				<li><a href="#libros">Libros</a></li>
+	    				<li><a href="#ejemplares">Ejemplares</a></li>
+	    				<li><a href="#autores">Autores</a></li>
+	    				<li><a href="#descriptores">Descriptores</a></li>
+	    				<li><a href="#usuarios">Usuarios</a></li>
+	    				<li><a href="#transacciones">Transacciones</a></li>
+	    				<li><a href="#prestamos">Préstamos</a></li>
+	    			</ul>
+
+	    			<a class="anchor" name="libros"></a>
+	    			<h2>Libros</h2>
+	    			<table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-100</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir registrar un libro. Para ello deben incluirse los siguientes datos: el ISBN del libro, título, volumen, editorial, fecha de publicación, autores y descriptores asociados, número de ejemplares y tipo de libro (préstamo o reserva).</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-101</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe validar que los campos necesarios para registrar un libro sean válidos.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-102</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir modificar la información de un libro registrado en el sistema.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-103</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir modificar el estado de libro de reserva a préstamo y viceversa.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-104</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir consultar los libros registrados en el sistema mediante su número de ISBN, sus descriptores, título o autor.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-105</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir asociar uno o varios autores existentes a un libro.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-106</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir asociar uno o varios descriptores existentes a un libro.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+                    <a class="anchor" name="ejemplares"></a>
+                    <h2>Ejemplares</h2>
+	    			<table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-200</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir registrar el ejemplar de un libro. Para ello se debe indica el libro del cuál es un ejemplar, el código, el estado físico (excelente, bueno, malo), fecha de ingreso del ejemplar y condición actual del ejemplar (libre, prestado, reservado, reparación, fuera de uso o perdido).</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-201</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir cambiar la condición actual de un ejemplar a algunos de los siguientes valores: libre, prestado, reservado, reparación, fuera de uso o perdido.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-202</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir cambiar el estado físico de un ejemplar a algunos de los siguientes valores: excelente, bueno, malo.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-203</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir consultar un ejemplar por su código o por las características del libro que tiene asociado: ISBN, descriptores, aproximación del título o de autor. Los resultados a mostrar serán: la información del libro, los ejemplares existentes y disponibles.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+                    <a class="anchor" name="autores"></a>
+                    <h2>Autores</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-300</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir crear un autor en el sistema, para ello se deberá ingresar la identificación, nombre, apellido, dirección electrónica, nacionalidad y país de origen.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-301</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe validar que la información que se ingresa de un autor sea válida.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-302</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir modificar la información de un autor, exceptuando por su identificación.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-303</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir eliminar un autor existente. Al hacerlo deberá informar al usuario que con la eliminación del autor también se eliminarán los libros, ejemplares y transaccciones que tenga asociados.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-304</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir consultar la información de un autor registrado en el sistema por su número de identificación.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+                    <a class="anchor" name="descriptores"></a>
+                    <h2>Descriptores</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-400</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir crear un descriptor que incluya su código y una descripción.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-401</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe validar que al crear un descriptor la información ingresada sea válida.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-402</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir consultar un descriptor existente en el sistema mediante su código.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+                    <a class="anchor" name="usuarios"></a>
+                    <h2>Usuarios</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-500</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir crear un usuario indicando: identificación, nombre, apellido, dirección electrónica, dirección física y teléfono.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-501</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe validar que al crear o modificar un usuario la información ingresada sea válida.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-502</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir modificar la información de un usuario existe exceptuando por su identificación.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-503</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir eliminar un usuario existente. Al hacerlo el sistema deberá informar que también se eliminarán las transacciones que el usuario tenga registradas.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-504</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir consultar un usuario por su número de identificación o nombre y apellidos. Los resultados de la consultas deberán incluir: identificación, nombre, apellido, dirección electrónica, dirección física, teléfono, estado (moroso o normal), si está moroso indica la deuda y los libros que tiene en modalidad de préstamo.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+                    <a class="anchor" name="transacciones"></a>
+                    <h2>Transacciones</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-600</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir registrar una transacción realizada al ejemplar de un libro incluyendo los siguientes datos: tipo de transacción (salida de libro, reporte de entrada del libro, reporte de préstamo de libro, reporte de devolución de libro, reporte de reservación de libro y libro fuera de uso), fecha en que se realizó, descripción y usuario que la realizó.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-601</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe validar que la información ingresada para una transacción está completa y correcta.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+					<table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-602</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe permitir consultar las transacciones registradas a un ejemplar de un libro, mediante: una fecha determinada, en un rango de tiempo o listar todas las transacciones realizadas sobre él mismo.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>                    
+
+                    <a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+                    <a class="anchor" name="prestamos"></a>
+                    <h2>Préstamos</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-700</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <!-- TODO: definir los datos que se van a guardar -->
+                            <td>El sistema debe permitir registrar el préstamo de un libro a un usuario.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID:</th>
+                            <td>RF-701</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>El sistema debe validar que la información ingresada de un préstamo está completa y correcta.</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>Incompleto</td>
+                        </tr>
+                        <tr>
+                            <th>Creación:</th>
+                            <td>07/12/2014</td>
+                        </tr>
+                        <tr>
+                            <th>Versión:</th>
+                            <td>1.0</td>
+                        </tr>
+                    </table> 
+
+                                                          
+
+                    <a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+	    		</div>
+	    	</div>
+	    </div>
+	    <footer>
+    		<p>Sistema de Información para Biblioteca "DuermaPoco LeaMas"</p>
+    		<p class="desarrollo">Desarrollado por: Miguel Coto García y Elizabeth Villalobos Molina</p>
+    	</footer>
+
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

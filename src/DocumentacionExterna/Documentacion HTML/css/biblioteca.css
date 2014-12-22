@@ -1,0 +1,120 @@
+body {
+	color: #666;
+	font-size: 14px;
+}
+
+h1 {
+	font-size: 2.4em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.6em;
+}
+
+h4 {
+	font-size: 1.3em;
+}
+
+h5 {
+	font-size: 1.1em;
+}
+
+table {
+	border-bottom: 1px solid #dddddd;
+	font-size: 14px;
+}
+
+.anchor {
+	padding-top: 300px;
+}
+
+.casos-uso td, 
+.casos-uso th {
+	width: 25%;
+}
+
+.go-top {
+	margin-top: -10px;
+	margin-bottom: 80px;
+	font-size: 14px;
+}
+
+.navbar-brand {
+	background: url("../images/duermapoco-leamas.png") no-repeat left 18px;
+	background-size: 38%;
+	height: 64px;
+	padding-left: 65px;
+	position: relative; 
+	top: -10px;
+}
+
+.navbar-brand img {
+	float: left;
+	margin: 0 5px 0 0;
+}
+
+.navbar-brand .biblioteca {
+	font-size: 22px; 
+	line-height: 22px;
+}
+
+.navbar-brand .sistema {
+	display: block;
+	line-height: 11px;
+	font-size: 12px;
+	position: relative;
+	top: -3px;
+	width: 90px;
+}
+
+.page-header {
+	margin-top: 75px;
+}
+
+.portada {
+	text-align: center;
+}
+
+.portada h1,
+.portada h2,
+.portada h3,
+.portada h4,
+.portada h5,
+.portada h6 {
+	margin: 25px 0;
+}
+
+.left {
+	float: left; margin: 0 10px 10px 0;
+}
+
+.requerimientos th {
+	width: 150px;
+}
+
+.right {
+	float: right; margin: 0 0 10px 10px;
+}
+
+.table {
+	margin-bottom: 50px;
+}
+
+footer {
+	background: #ddd;
+	font-size: 12px;
+	margin: 80px 0 auto;
+	padding: 10px;
+	position: relative;
+	width: 100%;
+}
+
+footer .desarrollo {
+	position: absolute; 
+	right: 10px;
+	top: 10px;
+}

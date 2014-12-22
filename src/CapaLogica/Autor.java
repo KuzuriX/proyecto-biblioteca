@@ -8,7 +8,17 @@ public class Autor {
 	private String nacionalidad;
 	private String paisOrigen;
 	
-	public Autor(String pid, String pnombre, String papellido, String pdirElectronica, String pnacionalidad, String ppaisOrigen){
+	/**
+	 * Constructor de Autor.
+	 * @param pid				Identificador del autor.
+	 * @param pnombre			Nombre del autor.
+	 * @param papellido			Apellido del autor.
+	 * @param pdirElectronica	Direccion electronica del autor.
+	 * @param pnacionalidad		Nacionalidad del autor.
+	 * @param ppaisOrigen		Pais de origen del autor.
+	 */
+	public Autor(String pid, String pnombre, String papellido, String pdirElectronica, 
+			String pnacionalidad, String ppaisOrigen) {
 		setId(pid);
 		setNombre(pnombre);
 		setApellido(papellido);
@@ -16,86 +26,98 @@ public class Autor {
 		setNacionalidad(pnacionalidad);
 		setPaisOrigen(ppaisOrigen);
 	}
-
+	
 	/**
-	 * @return the id
+	 * getId
+	 * @return String identificador del autor.
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * setId
+	 * @param id identificador del autor.
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the nombre
+	 * getNombre
+	 * @return String nombre del autor.
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * setNombre
+	 * @param nombre Nombre del autor.
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	/**
-	 * @return the apellido
+	 * getApellido
+	 * @return String apellido del autor.
 	 */
 	public String getApellido() {
 		return apellido;
 	}
 
 	/**
-	 * @param apellido the apellido to set
+	 * setApellido
+	 * @param apellido Apellido del autor.
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
 	/**
-	 * @return the dirElectronica
+	 * getDirElectronica
+	 * @return String direccion electronica del autor.
 	 */
 	public String getDirElectronica() {
 		return dirElectronica;
 	}
 
 	/**
-	 * @param dirElectronica the dirElectronica to set
+	 * setDirElectronica
+	 * @param dirElectronica la direccion electronica del autor.
 	 */
 	public void setDirElectronica(String dirElectronica) {
 		this.dirElectronica = dirElectronica;
 	}
 
 	/**
-	 * @return the nacionalidad
+	 * getNacionalidad
+	 * @return String nacionalidad del autor.
 	 */
 	public String getNacionalidad() {
 		return nacionalidad;
 	}
 
 	/**
-	 * @param nacionalidad the nacionalidad to set
+	 * setNacionalidad
+	 * @param nacionalidad la nacionalidad del autor.
 	 */
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
 
 	/**
-	 * @return the paisOrigen
+	 * getPaisOrigen
+	 * @return String pais de origen del autor.
 	 */
 	public String getPaisOrigen() {
 		return paisOrigen;
 	}
 
 	/**
-	 * @param paisOrigen the paisOrigen to set
+	 * setPaisOrigen
+	 * @param paisOrigen pais de origen del autor.
 	 */
 	public void setPaisOrigen(String paisOrigen) {
 		this.paisOrigen = paisOrigen;
@@ -111,9 +133,4 @@ public class Autor {
 				+ ", nacionalidad=" + nacionalidad + ", paisOrigen="
 				+ paisOrigen + "]";
 	}
-	
-	
-	
-	
-
 }

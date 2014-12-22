@@ -9,15 +9,15 @@ public class Usuario {
 	private String telefono;
 	private String estado;
 	
-	
 	/**
-	 * @param id
-	 * @param nombre
-	 * @param apellido
-	 * @param dirElectronica
-	 * @param direccion
-	 * @param telefono
-	 * @param estado
+	 * Constructor de Usuario
+	 * @param pid				Identificacion del usuario.
+	 * @param pnombre			Nombre del usuario.
+	 * @param papellido			Apellido del usuario.
+	 * @param pdirElectronica	Direccion electronica del usuario.
+	 * @param pdireccion		Direccion fisica del usuario.
+	 * @param ptelefono			Telefono del usuario.
+	 * @param pestado			Estado del usuario. Puede ser "normal" o "moroso".
 	 */
 	public Usuario(String pid, String pnombre, String papellido,
 			String pdirElectronica, String pdireccion, String ptelefono,
@@ -32,85 +32,114 @@ public class Usuario {
 	}
 	
 	/**
-	 * @return the id
+	 * getId
+	 * @return String identificacion del usuario.
 	 */
 	public String getId() {
 		return id;
 	}
+	
 	/**
-	 * @param id the id to set
+	 * setId 
+	 * @param id identificacion del usuario.
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	/**
-	 * @return the nombre
+	 * getNombre
+	 * @return String nombre del usuario.
 	 */
 	public String getNombre() {
 		return nombre;
 	}
+	
 	/**
-	 * @param nombre the nombre to set
+	 * setNombre
+	 * @param nombre nombre del usuario.
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	/**
-	 * @return the apellido
+	 * getApellido
+	 * @return String apellido del usuario.
 	 */
 	public String getApellido() {
 		return apellido;
 	}
+	
 	/**
-	 * @param apellido the apellido to set
+	 * setApellido
+	 * @param apellido apellido del usuario.
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	
 	/**
-	 * @return the dirElectronica
+	 * getDirElectronica
+	 * @return String direccion electronica del usuario.
 	 */
 	public String getDirElectronica() {
 		return dirElectronica;
 	}
+	
 	/**
-	 * @param dirElectronica the dirElectronica to set
+	 * setDirElectronica
+	 * @param dirElectronica direccion electronica del usuario.
 	 */
 	public void setDirElectronica(String dirElectronica) {
 		this.dirElectronica = dirElectronica;
 	}
+	
 	/**
-	 * @return the direccion
+	 * getDireccion
+	 * @return String direccion fisica del usuario.
 	 */
 	public String getDireccion() {
 		return direccion;
 	}
+	
 	/**
-	 * @param direccion the direccion to set
+	 * setDireccion
+	 * @param direccion direccion fisica del usuario.
 	 */
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	
 	/**
-	 * @return the telefono
+	 * getTelefono
+	 * @return String telefono del usuario.
 	 */
 	public String getTelefono() {
 		return telefono;
 	}
+	
 	/**
-	 * @param telefono the telefono to set
+	 * setTelefono
+	 * @param telefono numero telefonico del usuario.
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	
 	/**
-	 * @return the estado
+	 * getEstado
+	 * @return 	String estado del usuario.
+	 * 			Posible valores: "normal" o "moroso".
 	 */
 	public String getEstado() {
 		return estado;
 	}
+	
 	/**
-	 * @param estado the estado to set
+	 * setEstado
+	 * @param estado estado del usuario
+	 * 				 Posible valores: "normal" o "moroso".
 	 */
 	public void setEstado(String estado) {
 		this.estado = estado;

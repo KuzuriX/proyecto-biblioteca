@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<title>Proyecto 3: Sistema de Información para Biblioteca "DuermaPoco LeaMas"</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/bootswatch.min.css">
+		<link rel="stylesheet" type="text/css" href="css/biblioteca.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="index.html">
+	          	<span class="sistema">Sistema de Información para</span>
+	          	<span class="biblioteca">Biblioteca</span>
+	          </a>
+	        </div>
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="index.html">Inicio</a></li>
+	            <li><a href="descProblema.html">Descripción</a></li>
+	            <li><a href="requerContexto.html">Requerimientos</a></li>
+	            <!-- <li><a href="diagCasosUso.html">Diagrama Casos de Uso</a></li> -->
+	            <li><a href="casosExpandidos.html">Casos Expandidos</a></li>
+	            <li class="dropdown active">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Diagramas <span class="caret"></span></a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li><a href="diagClases.html">Diagrama de Clases</a></li>
+	                <li class="active"><a href="diagSecuencias.html">Diagramas de Secuencia</a></li>
+	              </ul>
+	            </li>
+	            <li><a href="modeloER.html">Modelo Entidad-Relación</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+
+	    <div class="container">
+	    	<div class="page-header row">
+	    		<div class="col-lg-12">
+	    			<h1>Diagramas de Secuencia</h1>
+	    		</div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-lg-12">
+	    			<img src="images/diagramas-secuencia/libro/crear-libro.png"/>
+	    			<img src="images/diagramas-secuencia/libro/modificar-libro.png"/>
+	    			<img src="images/diagramas-secuencia/libro/eliminar-libro.png"/>
+	    			<img src="images/diagramas-secuencia/libro/consultar-libro-por-ISBN.png"/>
+	    			<img src="images/diagramas-secuencia/libro/obtener-ejemplares.png"/>
+	    		</div>
+	    		<div class="col-lg-12">
+	    			<img src="images/diagramas-secuencia/ejemplar/crear-ejemplar.png"/>
+	    			<img src="images/diagramas-secuencia/ejemplar/modificar-estado-fisico-ejemplar.png"/>
+	    			<img src="images/diagramas-secuencia/ejemplar/consultar-ejemplares-ISBN.png"/>
+	    			<img src="images/diagramas-secuencia/ejemplar/consultar-ejemplar-codigo.png"/>
+	    		</div>
+				<div class="col-lg-12">
+	    			<img src="images/diagramas-secuencia/usuario/crear-usuario.png"/>
+	    			<img src="images/diagramas-secuencia/usuario/modificar-usuario.png"/>
+	    			<img src="images/diagramas-secuencia/usuario/eliminar-usuario.png"/>
+	    			<img src="images/diagramas-secuencia/usuario/consultar-usuario.png"/>
+	    		</div>
+	    		<div class="col-lg-12">
+	    			<img src="images/diagramas-secuencia/transaccion/consultar-historial-por-rango-fechas.png"/>
+	    		</div>
+	    	</div>
+	    </div>
+	    <footer>
+    		<p>Sistema de Información para Biblioteca "DuermaPoco LeaMas"</p>
+    		<p class="desarrollo">Desarrollado por: Miguel Coto García y Elizabeth Villalobos Molina</p>
+    	</footer>
+
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

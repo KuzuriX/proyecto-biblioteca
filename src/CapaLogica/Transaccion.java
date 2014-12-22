@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 
 public class Transaccion {
+	private int id;
 	private TipoTransaccion tipoTransaccion;
 	private LocalDate fecha;
 	private String descripcion;
@@ -22,8 +23,9 @@ public class Transaccion {
 	 * @param idEjemplar
 	 * @param idUsuario
 	 */
-	public Transaccion(int ptipo, LocalDate pfecha,
+	public Transaccion(int pid, int ptipo, LocalDate pfecha,
 			String pdescripcion, String pidEjemplar, String pidUsuario) {
+		setId(pid);
 		setFecha(pfecha);
 		setDescripcion(pdescripcion);
 		setIdEjemplar(pidEjemplar);
@@ -31,6 +33,14 @@ public class Transaccion {
 		establecerTipoTransaccion(ptipo);
 		
 		ejemplar = null;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	private void setId(int pid) {
+		id = pid;
 	}
 	
 	/**
@@ -95,8 +105,8 @@ public class Transaccion {
 		this.idUsuario = idUsuario;
 	}
 	
-	public Ejemplar obtenerEjemplar() throws SQLException, Exception {
-		ejemplar = (new MultiEjemplar().buscar(idEjemplar));
+	public Ejemplar obtenerEjemplar() {
+		//ejemplar = (new MultiEjemplar()).buscar(idEjemplar);
 		return ejemplar;
 	}
 	

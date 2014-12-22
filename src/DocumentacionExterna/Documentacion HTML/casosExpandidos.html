@@ -1,0 +1,230 @@
+<html>
+	<head>
+		<title>Proyecto 3: Sistema de Información para Biblioteca "DuermaPoco LeaMas"</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/bootswatch.min.css">
+		<link rel="stylesheet" type="text/css" href="css/biblioteca.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="index.html">
+	          	<span class="sistema">Sistema de Información para</span>
+	          	<span class="biblioteca">Biblioteca</span>
+	          </a>
+	        </div>
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="index.html">Inicio</a></li>
+	            <li><a href="descProblema.html">Descripción</a></li>
+	            <li><a href="requerContexto.html">Requerimientos</a></li>
+	            <!-- <li><a href="diagCasosUso.html">Diagrama Casos de Uso</a></li> -->
+	            <li class="active"><a href="casosExpandidos.html">Casos Expandidos</a></li>
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Diagramas <span class="caret"></span></a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li><a href="diagClases.html">Diagrama de Clases</a></li>
+	                <li><a href="diagSecuencias.html">Diagramas de Secuencia</a></li>
+	              </ul>
+	            </li>
+	            <li><a href="modeloER.html">Modelo Entidad-Relación</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+
+	    <div class="container casos-uso">
+	    	<div class="page-header row">
+	    		<div class="col-lg-12">
+	    			<h1>Casos de Uso Expandidos</h1>
+	    		</div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-lg-12">
+	    			<a class="anchor" name="go-top"></a>
+	    			<ul>
+	    				<li><a href="#libros">Libros</a></li>
+	    				<li><a href="#ejemplares">Ejemplares</a></li>
+	    				<li><a href="#autores">Autores</a></li>
+	    				<li><a href="#descriptores">Descriptores</a></li>
+	    				<li><a href="#usuarios">Usuarios</a></li>
+	    				<li><a href="#transacciones">Transacciones</a></li>
+	    				<li><a href="#prestamos">Préstamos</a></li>
+	    			</ul>
+
+	    			<a class="anchor" name="libros"></a>
+	    			<h2>Libros</h2>
+
+					<h3>Crear libro</h3>
+					<table class="table table-striped">
+                        <tr>
+                            <th>Código:</th>
+                            <td>CUFE-100</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Nombre:</th>
+                            <td colspan="3">Crear libro</td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Referencias:</th>
+                            <td colspan="3">Requerimientos asociados<br/>
+                                RF-100, RF-101</td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Descripción:</th>
+                            <td colspan="3">Este caso de uso permite que se cree un libro en el sistema.</td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Actor(es):</th>
+                            <td colspan="3">Sistema.</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Actor</th>
+                            <th colspan="2">Sistema</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Este caso de uso inicia cuando el usuario selecciona la opción "Crear libro".</td>
+                            <td colspan="2">El sistema muestra al usuario la pantalla para crear un nuevo libro.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">El actor ingresa la información en los campos requeridos y presiona el botón "Guardar".</td>
+                            <td colspan="2">El sistema valida la información ingresada por el actor.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">El sistema verifica que el libro no se encuentre ya registrado.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">Este caso de uso finaliza cuando el sistema guarda el nuevo libro.<br/>Este caso de uso termina en condición de éxito.</td>
+                        </tr>
+                    </table>
+
+					<h3>Modificar libro</h3>
+					<table class="table table-striped">
+                        <tr>
+                            <th>Código:</th>
+                            <td>CUFE-101</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Nombre:</th>
+                            <td colspan="3">Modificar libro</td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Referencias:</th>
+                            <td colspan="3">Requerimientos asociados<br/>
+                                RF-102, RF-103, RF-105, RF-106</td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Descripción:</th>
+                            <td colspan="3">Este caso de uso permite que se modifique la información de un libro registrado en el sistema.</td>
+                        </tr>
+                        <tr>
+                            <th colspan="1">Actor(es):</th>
+                            <td colspan="3">Sistema.</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Actor</th>
+                            <th colspan="2">Sistema</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Este caso de uso inicia cuando el usuario selecciona un libro registrado en la base de datos y presiona el botón de modificar.</td>
+                            <td colspan="2">El sistema muestra la pantalla para modificar la información de libros.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">El actor modifica los datos necesarios y presiona el botón "Guardar".</td>
+                            <td colspan="2">El sistema valida la información ingresada por el actor.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">Este caso de uso finaliza cuando el sistema actualiza la información del libro seleccionado.<br/>Este caso de uso termina en condición de éxito.</td>
+                        </tr>
+                    </table>
+					<!-- <h3>Eliminar libro</h3>
+					<h3>Consultar libro por ISBN</h3>
+					<h3>Consultar libro por descriptores</h3>
+					<h3>Consultar libro por título</h3>
+					<h3>Consultar libro por autor</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+					<a class="anchor" name="ejemplares"></a>
+					<h2>Ejemplares</h2>
+					<h3>Crear ejemplar</h3>
+					<h3>Modificar estado físico de ejemplar</h3>
+					<h3>Modificar condición actual de ejemplar</h3>
+					<h3>Consultar ejemplar por código</h3>
+					<h3>Consultar ejemplar por ISBN</h3>
+					<h3>Consultar ejemplar por descriptores</h3>
+					<h3>Consultar ejemplar por título</h3>
+					<h3>Consultar ejemplar por autor</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+					<a class="anchor" name="autores"></a>
+					<h2>Autores</h2>
+					<h3>Crear autor</h3>
+					<h3>Modificar autor</h3>
+					<h3>Eliminar autor</h3>
+					<h3>Consultar autor por identificación</h3>
+					<h3>Consultar autor por nombre</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+					<a class="anchor" name="descriptores"></a>
+					<h2>Descriptores</h2>
+					<h3>Crear descriptor</h3>
+					<h3>Listar descriptores</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+					<a class="anchor" name="usuarios"></a>
+					<h2>Usuarios</h2>
+					<h3>Crear usuario</h3>
+					<h3>Modificar usuario</h3>
+					<h3>Eliminar usuario</h3>
+					<h3>Listar usuarios</h3>
+					<h3>Consultar usuario por identificación</h3>
+					<h3>Consultar usuario por nombre y apellidos</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+					<a class="anchor" name="transacciones"></a>
+					<h2>Transacciones</h2>
+					<h3>Crear transacción</h3>
+					<h3>Consultar transacciones por ejemplar</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a>
+
+
+					<a class="anchor" name="prestamos"></a>
+					<h2>Préstamos</h2>
+					<h3>Crear préstamo</h3>
+					<h3>Modificar préstamo</h3>
+					<h3>Consultar préstamos por usuario</h3>
+					<h3>Consultar préstamos por código de ejemplar</h3>
+					<a class="go-top glyphicon glyphicon-arrow-up" href="#top">Ir arriba</a> -->
+
+	    		</div>
+	    	</div>
+	    </div>
+	    <footer>
+    		<p>Sistema de Información para Biblioteca "DuermaPoco LeaMas"</p>
+    		<p class="desarrollo">Desarrollado por: Miguel Coto García y Elizabeth Villalobos Molina</p>
+    	</footer>
+
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

@@ -4,34 +4,43 @@ public class Descriptor {
 	private String codigo;
 	private String descripcion;
 	
+	/**
+	 * Constructor de Descriptor
+	 * @param pcodigo		Codigo del descriptor.
+	 * @param pdescripcion	Descripcion.
+	 */
 	public Descriptor(String pcodigo, String pdescripcion){
 		setCodigo(pcodigo);
 		setDescripcion(pdescripcion);
 	}
 
 	/**
-	 * @return the codigo
+	 * getCodigo
+	 * @return String codigo del descriptor.
 	 */
 	public String getCodigo() {
 		return codigo;
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * setCodigo
+	 * @param codigo codigo del descriptor del libro.
 	 */
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
 	/**
-	 * @return the descripcion
+	 * getDescripcion
+	 * @return String Descripcion del descriptor del libro.
 	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * setDescripcion
+	 * @param descripcion del descriptor del libro.
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
