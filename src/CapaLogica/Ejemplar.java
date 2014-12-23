@@ -8,7 +8,7 @@ public class Ejemplar {
 	private String codigo;
 	private String estadoFisico; // 0: Excelente, 1: Bueno, 2: Malo
 	private LocalDate fechaIngreso;
-	private String condicionActual;
+	private String condicionActual; // 0: Libre, 1: Prestado, 2: Reservado, 3: Reparacion, 4: Fuera de uso, 5: Perdido
 	// Atributos de relaciones
 	private Libro libro;
 	// Persistencia
@@ -84,7 +84,7 @@ public class Ejemplar {
 	/**
 	 * @return the idLibro
 	 */
-	public String getIdLibro() {
+	public String obtenerISBN() {
 		return idLibro;
 	}
 
@@ -96,12 +96,8 @@ public class Ejemplar {
 	}
 	
 	public Libro obtenerLibro() throws SQLException, Exception {
-		libro = new MultiLibro().buscar(getIdLibro());
+		libro = new MultiLibro().buscar(obtenerISBN());
 		return libro;
-	}
-	
-	public String obtenerISBN() {
-		return getIdLibro();
 	}
 
 	/* (non-Javadoc)
@@ -111,7 +107,7 @@ public class Ejemplar {
 	public String toString() {
 		return "Ejemplar [codigo=" + codigo + ", estadoFisico=" + estadoFisico
 				+ ", fechaIngreso=" + fechaIngreso + ", condicionActual="
-				+ condicionActual + ", libro=" + libro + ", idLibro=" + idLibro
+				+ condicionActual + ", idLibro=" + idLibro
 				+ "]";
 	}
 }
