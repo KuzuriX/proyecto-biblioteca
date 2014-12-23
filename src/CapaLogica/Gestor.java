@@ -174,7 +174,6 @@ public class Gestor {
 		Usuario usuario = (new MultiUsuario()).buscar(pid);
 		TreeMap datos = new TreeMap();
 		
-		
 		datos.put("id", usuario.getId());
 		datos.put("nombre", usuario.getNombre());
 		datos.put("apellido", usuario.getApellido());
@@ -185,8 +184,16 @@ public class Gestor {
 		
 		// Libros en prestamo
 		Vector<Transaccion> transacciones = (new MultiTransaccion()).buscarPorIdUsuario(pid);
+		datos.put("prestamos", filtrarTransaccionesEnPrestamo(transacciones));			
+		
+		return datos;
+	}
+	
+	private ArrayList<String> filtrarTransaccionesEnPrestamo(Vector<Transaccion> transacciones) 
+			throws SQLException, Exception {
 		Vector<Transaccion> prestamos = new Vector();
 		Vector<Transaccion> devoluciones = new Vector();
+		ArrayList<String> listaEjemplares = new ArrayList<String>();
 		
 		for (int i = 0; i < transacciones.size(); i++) {
 			Transaccion transaccion = (Transaccion) transacciones.get(i);
@@ -199,8 +206,6 @@ public class Gestor {
 		}
 		
 		if (prestamos.size() > devoluciones.size()) {
-			// Hay prestamos pendientes.			
-			ArrayList<String> listaEjemplares = new ArrayList<String>();
 			int cantidadPrestamos = prestamos.size() - devoluciones.size();
 			
 			for (int j= 0; j < cantidadPrestamos; j++) {
@@ -209,13 +214,12 @@ public class Gestor {
 				Libro libro = ejemplar.obtenerLibro();
 				
 				listaEjemplares.add(ejemplar.getCodigo() + " " + libro.getTitulo());
-			}
-			datos.put("prestamos", listaEjemplares);			
+			}			
 		} else {
-			datos.put("prestamos", "El usuario NO tiene libros en prestamo");
+			listaEjemplares.add("El usuario NO tiene libros en prestamo");
 		}		
 		
-		return datos;
+		return listaEjemplares;
 	}
 
 	/* -------------------------- Libro -------------------------- */
@@ -419,7 +423,7 @@ public class Gestor {
 			ejemplar = ((Ejemplar) ejemplares.get(i));
 			TreeMap datos = new TreeMap();
 			
-			datos.put("idLibro", ejemplar.getIdLibro());
+			datos.put("idLibro", ejemplar.obtenerISBN());
 			datos.put("codigo", ejemplar.getCodigo());
 			datos.put("estadoFisico", ejemplar.getEstadoFisico());
 			datos.put("fechaIngreso", ejemplar.getFechaIngreso());
@@ -581,8 +585,9 @@ public class Gestor {
 			// Crear la transaccion
 			transaccion = (new MultiTransaccion()).crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
 			
-			// Actualizar el estado del ejemplar de Libre a el valor de retorno
+			// Actualizar el estado del ejemplar de Libre al valor de retorno
 			// del tipo de transaccion
+			transaccion.ejecutar(ejemplar);
 			ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
 			(new MultiEjemplar()).modificar(ejemplar);
 			
@@ -592,12 +597,6 @@ public class Gestor {
 		}	
 		
 		return msg;
-	}
-	
-	public void eliminarTransaccion(String pid) throws Exception {
-		Transaccion transaccion = (new MultiTransaccion()).buscar(pid);
-		
-		(new MultiTransaccion()).eliminar(transaccion);
 	}
 	
 	public Vector buscarTransaccionPorCodigoEjemplar(String pcodigo) throws Exception {

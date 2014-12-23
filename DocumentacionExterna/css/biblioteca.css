@@ -105,6 +105,7 @@ table {
 }
 
 footer {
+	display: block;
 	background: #ddd;
 	font-size: 12px;
 	margin: 80px 0 auto;
