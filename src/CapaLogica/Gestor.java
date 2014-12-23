@@ -584,12 +584,14 @@ public class Gestor {
 			
 			// Crear la transaccion
 			transaccion = (new MultiTransaccion()).crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
-			
-			// Actualizar el estado del ejemplar de Libre al valor de retorno
+
+			/*// Actualizar el estado del ejemplar de Libre a el valor de retorno
 			// del tipo de transaccion
 			transaccion.ejecutar(ejemplar);
 			ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
-			(new MultiEjemplar()).modificar(ejemplar);
+			(new MultiEjemplar()).modificar(ejemplar);*/
+			
+			transaccion.ejecutarTransaccion();
 			
 			msg = "La transaccion se creo con exito!";
 		} else {

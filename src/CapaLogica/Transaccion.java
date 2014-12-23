@@ -170,6 +170,11 @@ public class Transaccion {
 		return tipoTransaccion.obtenerCondicion();
 	}
 	
+
+	public void ejecutarTransaccion() throws SQLException, Exception{
+		tipoTransaccion.ejecutarTransaccion(fecha, descripcion, idEjemplar, idUsuario);
+	}
+
 	@Override
 	public String toString() {
 		String estado = "Id: " + getId() + "\n" +
@@ -181,6 +186,7 @@ public class Transaccion {
 		
 		return estado;
 	} 
+
 }
 
 
