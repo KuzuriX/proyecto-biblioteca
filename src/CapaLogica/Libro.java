@@ -15,16 +15,15 @@ public class Libro {
 	private String editorial;
 	private LocalDate fechaPublicacion;
 	private String tipo; // Reserva o prestamo
-	
+	// Persistencia
+	private Vector<String> idsAutores;
+	private Vector<String> idsDescriptores;
+	private Vector<String> idsEjemplares;
 	// Atributos de relaciones
 	private Vector<Autor> listaAutores;
 	private Vector<Descriptor> listaDescriptores;
 	private Vector<Ejemplar> listaEjemplares;
 	
-	// Persistencia
-	private Vector<String> idsAutores;
-	private Vector<String> idsDescriptores;
-	private Vector<String> idsEjemplares;
 	
 	/**
 	 * Constructor de Libro
@@ -149,12 +148,11 @@ public class Libro {
 	}
 	
 	/**
-	 * obtenerTotalEjemplares
+	 * obtenerNumEjemplares
 	 * @return int total de ejemplares que tiene el libro.
 	 */
-	public int obtenerTotalEjemplares() {
-		// TODO: obtener el size() de los ejemplares
-		return 0;
+	public int obtenerNumEjemplares() {
+		return idsEjemplares.size();
 	}
 	
 	/**
@@ -207,11 +205,13 @@ public class Libro {
 	/**
 	 * obtenerEjemplares
 	 * Retorna una lista de objetos de tipo de Ejemplar asociados al libro.
-	 * @return
+	 * @return Vector<Ejemplar> Vector con objetos de tipo Ejemplar
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public Vector<Ejemplar> obtenerEjemplares() {
-		for (int i = 0; i < idsDescriptores.size(); i++) {
-			//listaEjemplares.add((new MultiEjemplar()).buscar(idsDescriptores.get(i)));
+	public Vector<Ejemplar> obtenerEjemplares() throws SQLException, Exception {
+		for (int i = 0; i < idsEjemplares.size(); i++) {
+			listaEjemplares.add((new MultiEjemplar()).buscar(idsEjemplares.get(i)));
 		}
 		
 		return listaEjemplares;

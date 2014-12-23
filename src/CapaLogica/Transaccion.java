@@ -3,6 +3,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 
 public class Transaccion {
 	private int id;
@@ -167,4 +169,21 @@ public class Transaccion {
 	public String obtenerCondicionTransaccion() {
 		return tipoTransaccion.obtenerCondicion();
 	}
+	
+	@Override
+	public String toString() {
+		String estado = "Id: " + getId() + "\n" +
+				"Tipo: " + obtenerTipoTransaccion() + "\n" +
+				"Fecha: " + getFecha() + "\n" + 
+				"Descripcion: " + getDescripcion() + "\n" + 
+				"Ejemplar: " + getIdEjemplar() + "\n" +
+				"Usuario:" + getIdUsuario();
+		
+		return estado;
+	} 
 }
+
+
+
+
+
