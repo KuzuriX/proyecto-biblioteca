@@ -22,7 +22,7 @@ public class MultiLibro {
 		return libro;
 	}
 	
-	public Libro buscar(String pisbn) throws java.sql.SQLException,Exception{
+	public Libro buscar(String pisbn) throws java.sql.SQLException,Exception {
 		Libro libro = null;
 		ResultSet rs;
 		String sql;
@@ -134,8 +134,8 @@ public class MultiLibro {
 					rs.getString("tipo"));
 				
 				// Obtener los autores del libro.
-				sql = "SELECT idautor FROM TAutoresXLibro;";
-				rsAutores = Conector.getConector().ejecutarSQL(sql, true);				
+				sql = "SELECT idautor FROM TAutoresXLibro WHERE idlibro = '" + libro.getISBN() + "';";
+				rsAutores = Conector.getConector().ejecutarSQL(sql, true);
 				if (rsAutores.next()) {
 					do {
 						libro.asignarAutor(rsAutores.getString("idautor"));
@@ -143,7 +143,7 @@ public class MultiLibro {
 				}
 				
 				// Obtener los descriptores del libro.
-				sql = "SELECT iddescriptor FROM TDescriptoresXLibro;";
+				sql = "SELECT iddescriptor FROM TDescriptoresXLibro WHERE idlibro = '" + libro.getISBN() + "';";
 				rsDescriptores = Conector.getConector().ejecutarSQL(sql, true);				
 				if (rsDescriptores.next()) {
 					do {
