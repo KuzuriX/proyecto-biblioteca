@@ -3,6 +3,7 @@ package CapaLogica;
 public class Biblioteca {
 	private int maxDiasPrestamo;
 	private double multaPorDiaMorosidad;
+	private static int id;
 	
 	/**
 	 * Constructor
@@ -12,6 +13,7 @@ public class Biblioteca {
 	public Biblioteca(int pmaxDiasPrestamo, double pmultaPorDiaMorosidad) {
 		setMaxDiasPrestamo(pmaxDiasPrestamo);
 		setMultaPorMorosidad(pmultaPorDiaMorosidad);
+		setId(id++);
 	}
 
 	/**
@@ -20,6 +22,20 @@ public class Biblioteca {
 	 */
 	public int getMaxDiasPrestamo() {
 		return maxDiasPrestamo;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public static int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public static void setId(int id) {
+		Biblioteca.id = id;
 	}
 
 	/**
