@@ -167,4 +167,8 @@ public class Transaccion {
 	public String obtenerCondicionTransaccion() {
 		return tipoTransaccion.obtenerCondicion();
 	}
+	
+	public void ejecutarTransaccion(){
+		tipoTransaccion.ejecutarTransaccion(fecha, descripcion, idEjemplar, idUsuario);
+	}
 }
