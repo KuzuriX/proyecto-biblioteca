@@ -121,7 +121,7 @@ public class MultiTransaccion {
 		int ultimoId = 0;
 		String sql;
 		ResultSet rs;
-		sql = "SELECT * FROM TTransaccion ORDER BY id;";
+		sql = "SELECT * FROM TTransaccion ORDER BY id DESC;";
 		rs = Conector.getConector().ejecutarSQL(sql,true);
 		
 		if (rs.next()){

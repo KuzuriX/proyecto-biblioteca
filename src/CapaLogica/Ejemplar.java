@@ -95,6 +95,10 @@ public class Ejemplar {
 		this.idLibro = idLibro;
 	}
 	
+	public String getIdLibro(){
+		return idLibro;
+	}
+	
 	public Libro obtenerLibro() throws SQLException, Exception {
 		libro = new MultiLibro().buscar(obtenerISBN());
 		return libro;

@@ -553,7 +553,7 @@ public class Gestor {
 	
 	public String crearTransaccion(int ptipo, String pdescripcion, String idEjemplar, 
 			String idUsuario) throws Exception {
-		String msg = "";
+		String msg = "La transaccion se creo con exito!";
 		Transaccion transaccion = null;
 		Ejemplar ejemplar = null;
 		Usuario usuario = null;
@@ -577,26 +577,27 @@ public class Gestor {
 			return "No se pudo realizar la transaccion. El usuario se encuentra moroso.";
 		}
 		
+		if(!(ejemplar.getCondicionActual().equals("Libre")) && ptipo == 3){
+			return "No pudo realizar la transaccion. El ejemplar se encuentra " + ejemplar.getCondicionActual();
+		}
+		
 		// Verificar que el ejemplar esta libre.
-		if (ejemplar.getCondicionActual().equals("Libre")) {
-			// Obtener el ultimo id de transacciones registradas en la BD.
-			int id = (new MultiTransaccion()).obtenerUltimoId() + 1;
-			
-			// Crear la transaccion
-			transaccion = (new MultiTransaccion()).crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
+		
+		// Obtener el ultimo id de transacciones registradas en la BD.
+		int id = (new MultiTransaccion()).obtenerUltimoId() + 1;
+		
+		// Crear la transaccion
+		transaccion = new MultiTransaccion().crear(id, ptipo, fechaTrans, pdescripcion, idEjemplar, idUsuario);
 
-			/*// Actualizar el estado del ejemplar de Libre a el valor de retorno
-			// del tipo de transaccion
-			transaccion.ejecutar(ejemplar);
-			ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
-			(new MultiEjemplar()).modificar(ejemplar);*/
+		/*// Actualizar el estado del ejemplar de Libre a el valor de retorno
+		// del tipo de transaccion
+		transaccion.ejecutar(ejemplar);
+		ejemplar.setCondicionActual(transaccion.obtenerCondicionTransaccion());
+		(new MultiEjemplar()).modificar(ejemplar);*/
+		
+		transaccion.ejecutarTransaccion();
 			
-			transaccion.ejecutarTransaccion();
-			
-			msg = "La transaccion se creo con exito!";
-		} else {
-			msg = "No pudo realizar la transaccion. El ejemplar se encuentra " + ejemplar.getCondicionActual();
-		}	
+		
 		
 		return msg;
 	}

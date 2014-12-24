@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/Users/elizabeth/Documents/UCanAccess-2.0.9.2-bin/ucanaccess-2.0.9.2.jar"/>
-	<classpathentry kind="lib" path="/Users/elizabeth/Documents/UCanAccess-2.0.9.2-bin/lib/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="/Users/elizabeth/Documents/UCanAccess-2.0.9.2-bin/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/elizabeth/Documents/UCanAccess-2.0.9.2-bin/lib/hsqldb.jar"/>
-	<classpathentry kind="lib" path="/Users/elizabeth/Documents/UCanAccess-2.0.9.2-bin/lib/jackcess-2.0.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/miguel/Downloads/UCanAccess-2.0.9.2-bin/ucanaccess-2.0.9.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/miguel/Downloads/UCanAccess-2.0.9.2-bin/lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/miguel/Downloads/UCanAccess-2.0.9.2-bin/lib/commons-logging-1.1.1.jar"/>
